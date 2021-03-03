@@ -1,6 +1,8 @@
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from .follow import Follow
+
 
 class User(db.Model, UserMixin):
   __tablename__ = 'users'
@@ -11,6 +13,12 @@ class User(db.Model, UserMixin):
   username = db.Column(db.String(40), nullable = False, unique = True)
   email = db.Column(db.String(255), nullable = False, unique = True)
   hashed_password = db.Column(db.String(255), nullable = False)
+
+  rotation = db.relationship("Rotation", back_populates="user")
+  brew = db.relationship("Brew", back_populates="user")
+  comment = db.relationship("Comment", back_populates="user")
+  following_user = db.relationship("User", secondary=Follow, back_populates="followed_user")
+  followed_user = db.relationship("User", secondary=Follow, back_populates="following_user")
 
 
   @property
@@ -30,6 +38,8 @@ class User(db.Model, UserMixin):
   def to_dict(self):
     return {
       "id": self.id,
+      'first_name': self.first_name,
+      'last_name': self.last_name,
       "username": self.username,
       "email": self.email
     }
