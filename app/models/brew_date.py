@@ -12,7 +12,7 @@ class BrewDate(db.Model):
     bottling_day = db.Column(db.DateTime, nullable=False)
     drinking_day = db.Column(db.DateTime, nullable=False)
 
-    brew = db.relationship("Brew", back_populates="brew_date", uselist=False)
+    brew = db.relationship("Brew", back_populates="brew_date")
 
     def to_dict(self):
         return {

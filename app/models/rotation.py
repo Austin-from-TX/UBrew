@@ -10,7 +10,7 @@ class Rotation(db.Model):
     style = db.Column(db.String(25), nullable=False)
    
     user = db.relationship("User", back_populates="rotation")
-    brew = db.relationship("Brew", back_populates="rotation", uselist=False)
+    brew = db.relationship("Brew", back_populates="rotation")
 
 
     def to_dict(self):
