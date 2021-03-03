@@ -1,5 +1,10 @@
 /* TODO Add site wide styles */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Biryani&family=Open+Sans&display=swap');
 @font-face {
     font-family: 'Bourbon Grotesque';
     src: local('Bourbon Grotesque'), url('./fonts/BourbonGrotesque-Regular+(1).otf'), format('opentype');
+    font-family: 'Manjari';
+    src: local('Manjari'), url('./fonts/BourbonGrotesque-Regular+(1).otf'), format('opentype');
   }
