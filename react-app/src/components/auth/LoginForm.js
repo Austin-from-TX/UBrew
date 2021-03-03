@@ -37,7 +37,7 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
         ))}
       </div>
       <div>
-        <label htmlFor="email">Email</label>
+        <label style={{fontFamily: 'Bourbon Grotesque'}} htmlFor="email">Email</label>
         <input
           name="email"
           type="text"
