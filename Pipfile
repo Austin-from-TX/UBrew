@@ -24,6 +24,7 @@ email-validator = "*"
 Flask-Login = "*"
 wrapt = "*"
 alembic = "==1.4.3"
+boto3 = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
