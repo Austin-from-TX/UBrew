@@ -1,19 +1,17 @@
-import React, {useEffect} from 'react';
-import { useDispatch } from 'react-redux'
-import * as sessionActions from ''
+import React, {useEffect, useState} from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 
 
 const UserProf = () => {
 
     const dispatch = useDispatch()
-
-    useEffect() = > {
-        dispatch(sessionActions.getUserById(id))
-    }
+    const user = useSelector(state => state.session.user)
 
     return (
         <>
-          <h1>{}</h1>
+          <h1>Hello {user.username} from Your User Page </h1>
         </>
     )
 }
+
+export default UserProf

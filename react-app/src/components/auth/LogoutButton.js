@@ -7,7 +7,7 @@ const LogoutButton = ({setAuthenticated}) => {
     setAuthenticated(false);
   };
 
-  return <button onClick={onLogout}>Logout</button>;
+  return <button onClick={onLogout} className="text-yellow hover:bg-brown hover:text-amber px-6 py-4 rounded-md text-xl " style={{fontFamily: 'Bourbon Grotesque'}}>Logout</button>;
 };
 
 export default LogoutButton;

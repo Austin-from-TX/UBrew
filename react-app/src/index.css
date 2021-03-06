@@ -1,4 +1,8 @@
 /* TODO Add site wide styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Open+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Biryani&family=Open+Sans&display=swap');

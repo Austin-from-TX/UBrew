@@ -5,3 +5,4 @@ from .rotation import Rotation
 from .comment import Comment
 from .ingredient import Ingredient
 from .brew_date import BrewDate
+from .photo import Photo

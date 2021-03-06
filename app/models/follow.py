@@ -1,6 +1,7 @@
 from .db import db
 
-Follow = db.Table('follows',
-    db.Column('following_user', db.Integer, db.ForeignKey("users.id"), nullable = False, primary_key = True),
-    db.Column('followed_user', db.Integer, db.ForeignKey("users.id"), nullable = False, primary_key = True)
+follows = db.Table(
+    "follows", 
+    db.Column("follower_id", db.Integer, db.ForeignKey("users.id")),
+    db.Column("followed_id", db.Integer, db.ForeignKey("users.id"))
 )

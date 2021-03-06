@@ -1,19 +1,21 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 from app.forms import BrewForm
-import boto3
-import botocore
-from ..config import Config
-from ..helpers import *
 from app.models import db, Brew
 import json
 
 brew_routes = Blueprint('brews', __name__)
 
-@brew_routes.route('/new', methods=['POST'])
+
+@brew_routes.route('/get/<int:id>')
+def get_brew(id):
+    brew = Brew.query.get(id)
+    return brew.to_dict()
+
+@brew_routes.route('/', methods=['POST'])
 @login_required
 def add_brew():
-    form = new BrewForm()
+    form = BrewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         brew = Brew(
@@ -30,7 +32,10 @@ def add_brew():
             abv=form.data['abv'],
             ibu=form.data['ibu'],
             srm=form.data['srm'],
-            instructions=form.data['instructions'],
-           
+            instructions=form.data['instructions'],        
         )
-    
+
+        db.session.add(brew)
+        db.session.commit()
+        return brew.to_dict()
+    return form.errors     
