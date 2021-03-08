@@ -25,6 +25,7 @@ Flask-Login = "*"
 wrapt = "*"
 alembic = "==1.4.3"
 boto3 = "*"
+faker = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"

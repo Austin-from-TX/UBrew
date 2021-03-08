@@ -14,7 +14,7 @@ const NavBar = ({ setAuthenticated , authenticated, setDisplay }) => {
     <>
     
     <div>
-      <nav className='bg-blue border-b-4 border-brown' >
+      <nav className='bg-blue border-b-4 border-brown p-4' >
         <div className="mx-auto px-4 sm:px-6 lg:px-2">
           <div className="flex items-center justify-between h-36">
             <div className="flex items-center">
@@ -22,7 +22,7 @@ const NavBar = ({ setAuthenticated , authenticated, setDisplay }) => {
               {!authenticated && <NavLink to='/' exact={true} activeclassName="active">
             <img src={logo} className="h-36 w-36"/>
           </NavLink>}
-          {authenticated && <NavLink to={`/profile`} exact={true} activeclassName="active">
+          {authenticated && <NavLink to={`/dashboard`} exact={true} activeclassName="active">
            <img className="h-36 w-36" src={logo}  />
           </NavLink>}
                 
@@ -31,7 +31,7 @@ const NavBar = ({ setAuthenticated , authenticated, setDisplay }) => {
               <div className="hidden md:block flex">
                 <div className="ml-10 mx-auto flex-grow items-baseline space-x-4">
                 
-                  <SearchBar className='flex-grow' />
+                  {/* <SearchBar className='flex-grow' /> */}
                   
                 </div>
               </div>
@@ -52,6 +52,8 @@ const NavBar = ({ setAuthenticated , authenticated, setDisplay }) => {
         <div className="md:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3" role='menu'>
             {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
+            <NavLink to={`/search/brews`} className="transition duration-500 ease-in-out text-yellow hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Brews</NavLink>
+            
             <NavLink to='/login' className="text-yellow hover:bg-brown hover:text-amber px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Login</NavLink>
     
             <NavLink to='/sign-up' className="text-yellow hover:bg-brown hover:text-amber px-6 py-4 rounded-md text-xl"  style={{fontFamily: 'Bourbon Grotesque'}}>Signup</NavLink>

@@ -7,7 +7,7 @@ class Photo(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable = False)
     brew_id = db.Column(db.Integer, db.ForeignKey("brews.id"), nullable = False)
-    url = db.Column(db.String(255), nullable = False, unique = True)
+    url = db.Column(db.String(555), nullable = False, unique = True)
 
     user = db.relationship("User", back_populates="photos")
     brew = db.relationship("Brew", back_populates="photos")

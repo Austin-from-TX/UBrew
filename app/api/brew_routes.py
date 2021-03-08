@@ -12,6 +12,15 @@ def get_brew(id):
     brew = Brew.query.get(id)
     return brew.to_dict()
 
+
+@brew_routes.route('/get')
+def get_brews():
+    brews = Brew.query.all()
+    data = [brew.to_dict() for brew in brews]
+    res = json.dumps(data)
+    return res
+
+
 @brew_routes.route('/', methods=['POST'])
 @login_required
 def add_brew():
@@ -21,8 +30,8 @@ def add_brew():
         brew = Brew(
             user_id=form.data['user_id'],
             style=form.data['style'],
-            brew_name=form.data['brew_name'],
             author=form.data['author'],
+            brew_name=form.data['brew_name'],
             description=form.data['description'],
             original_grav=form.data['original_grav'],
             final_grav=form.data['final_grav'],
@@ -37,5 +46,6 @@ def add_brew():
 
         db.session.add(brew)
         db.session.commit()
+        
         return brew.to_dict()
     return form.errors     

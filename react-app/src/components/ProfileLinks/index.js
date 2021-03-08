@@ -1,5 +1,6 @@
 import LogoutButton from '../auth/LogoutButton';
 import { useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom'
 
 export default function ProfileLinks({setAuthenticated, setDisplay}){
 
@@ -9,11 +10,9 @@ export default function ProfileLinks({setAuthenticated, setDisplay}){
         <>
         {user && 
         <div className="ml-3 relative flex">
-                            
-            <a href={`/profile`} className="text-yellow hover:bg-brown hover:text-amber px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Home</a>
-            <a href={`/users/${user.id}/brews`} className="text-yellow hover:bg-brown hover:text-amber px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Brews</a>
-            <a href={`/brews/add/new`} className="text-yellow hover:bg-brown hover:text-amber px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Upload a Brew</a>
-            <a href={`/users/${user.id}/rotation`} className="text-yellow hover:bg-brown hover:text-amber px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Rotation</a>
+            <NavLink to={`/dashboard`} className="transition duration-500 ease-in-out text-yellow hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Home</NavLink>
+            <NavLink to={`/search/brews`} className="transition duration-500 ease-in-out text-yellow hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Brews</NavLink>             
+            <NavLink to={`/users/${user.id}/rotation`} className="transition duration-500 ease-in-out text-yellow hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Rotation</NavLink>
             <LogoutButton setAuthenticated={setAuthenticated} setDisplay={setDisplay} />
 
         </div>

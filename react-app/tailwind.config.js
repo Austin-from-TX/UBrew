@@ -13,6 +13,7 @@ module.exports = {
       yellow: {
       
         DEFAULT: '#ffea70',
+        dark: '#FFDA07'
         
       },
       amber: {
@@ -37,5 +38,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 }

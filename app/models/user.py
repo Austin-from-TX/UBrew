@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
   hashed_password = db.Column(db.String(255), nullable = False)
 
   rotation = db.relationship("Rotation", back_populates="user")
-  brew = db.relationship("Brew", back_populates="user")
+  brews = db.relationship("Brew", back_populates="users")
   photos = db.relationship("Photo", back_populates="user")
   comment = db.relationship("Comment", back_populates="user")
   followers = db.relationship(
@@ -47,5 +47,7 @@ class User(db.Model, UserMixin):
       'first_name': self.first_name,
       'last_name': self.last_name,
       "username": self.username,
-      "email": self.email
+      "email": self.email,
+      "brews": [brew.to_dict() for brew in self.brews]
     }
+

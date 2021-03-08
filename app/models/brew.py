@@ -9,8 +9,7 @@ class Brew(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     style = db.Column(db.String(25), nullable=False)
-    brew_name = db.Column(db.String(25), nullable=False)
-    author = db.Column(db.String(40), nullable=False)
+    brew_name = db.Column(db.String(50), nullable=False)
     description = db.Column(db.Text, nullable=False)
     original_grav = db.Column(db.Float, nullable=False)
     final_grav = db.Column(db.Float, nullable=False)
@@ -23,7 +22,7 @@ class Brew(db.Model):
     instructions = db.Column(db.Text, nullable=False)
     
 
-    user = db.relationship("User", back_populates="brew")
+    users = db.relationship("User", back_populates="brews")
     photos = db.relationship("Photo", back_populates="brew")
     comment = db.relationship("Comment", back_populates="brew")
     rotation = db.relationship("Rotation", back_populates="brew", uselist=False)
@@ -37,7 +36,6 @@ class Brew(db.Model):
             'user_id' : self.user_id,
             'style': self.style,
             'brew_name' : self.brew_name,
-            "author": self.author, 
             'description': self.description,
             'original_grav': self.original_grav,
             'final_grav': self.final_grav,
@@ -48,5 +46,7 @@ class Brew(db.Model):
             'ibu': self.ibu,
             'srm': self.srm,
             'instructions': self.instructions,
-            "photos": [photo.to_dict() for photo in self.photos]
+            "photos": [photo.to_dict() for photo in self.photos],
+            "users": self.users.username,
+           
         }

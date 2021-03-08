@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useHistory, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import * as brewActions from '../../store/brews'
 
@@ -8,7 +8,6 @@ const BrewForm = () => {
 
    
     const dispatch = useDispatch()
-    const history = useHistory()
     const sessionUser = useSelector(state => state.session.user)
     const newBrew = useSelector(state => state.brew.brew)
 
@@ -36,7 +35,6 @@ const BrewForm = () => {
                 user_id: sessionUser.id,
                 style,
                 brew_name: brewName,
-                author: sessionUser.username,
                 description,
                 original_grav,
                 final_grav,
@@ -67,10 +65,7 @@ const BrewForm = () => {
                 <label>Style</label>
                 <input type="text" placeholder="Beer Style" value={style} onChange={e => setStyle(e.target.value)} required/>
             </div>
-            <div>
-                <label>Photo</label>
-                <input type="file" onChange={e => setPhoto(e.target.files[0])} />
-            </div>
+            
             <div>
                 <label>Original Gravity</label>
                 <input
@@ -127,7 +122,7 @@ const BrewForm = () => {
                 />
             </div>
             <div>
-                <label>SRM</label>
+                <label>Color (in SRM)</label>
                 <input
                 type="number"
                 placeholder="6"
@@ -145,7 +140,12 @@ const BrewForm = () => {
                 <textarea type="textarea" placeholder="Your Instructions Here..." value={instructions} onChange={e => setInstructions(e.target.value)} required></textarea>
             </div>
             <div>
-                <button type="submit">Share Your Brew!</button>
+                <label className=" my-8 text-yellow bg-blue hover:bg-brown px-6 py-4 rounded-md text-xl" style={{fontFamily: 'Bourbon Grotesque'}}>Add A Photo
+                <input style={{display: 'none'}} type="file" onChange={e => setPhoto(e.target.files[0])} />
+                </label>
+            </div>
+            <div>
+                <button className="my-8 text-yellow bg-blue hover:bg-brown px-6 py-4 rounded-md text-xl" style={{fontFamily: 'Bourbon Grotesque'}} type="submit">Share Your Brew!</button>
             </div>
             </form>
         </div>
