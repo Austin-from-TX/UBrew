@@ -1,0 +1,34 @@
+
+.search-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.search-wrapper input:focus {
+    box-shadow: 0 0 4px #ffea70;
+}
+
+.search-wrapper input {
+    border: 1px solid #30545f;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    background-color: white;
+    flex-grow: 1;
+    outline: none;
+}
+
+
+.search-wrapper button {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+
+.search-wrapper button i {
+    color: #ffea70;
+}
+
+.search-wrapper button:hover {
+    text-shadow: 0 0 4px #d38c22;
+}
