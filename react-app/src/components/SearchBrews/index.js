@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import SearchBar from '../SearchBar/SearchBar'
+import BrewCard from '../BrewCard/BrewCard'
 import * as brewActions from '../../store/brews'
 
 
@@ -34,13 +35,13 @@ const SearchBrews = () => {
         getBrews()
     }, [dispatch])
 
-    useEffect(() => {
-      setFilter(
-        brewList.filter(brew => {
-          return brew.style === style
-        }, [brewList, style])
-      )
-    })
+    // useEffect(() => {
+    //   setFilter(
+    //     brewList.filter(brew => {
+    //       return brew.style === style
+    //     }, [brewList, style])
+    //   )
+    // })
 
 
   if (!loaded) return <span>Loading</span>;
@@ -63,12 +64,13 @@ const SearchBrews = () => {
         </select>
 
 
-        {style === 'Style' ? brewList.map(brew => (
+        {/* {style !== 'Style' ? filter.map(brew => (
           <div>{brew.brew_name}</div>
         ))
-        :
-        filter.map(brew => (
-          <div>{brew.brew_name}</div>
+        : */}
+
+        {brewList.map(brew => (
+          <BrewCard brew={brew} />
         ))}
         </>
     )

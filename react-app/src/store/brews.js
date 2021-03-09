@@ -1,5 +1,6 @@
 const NEW_BREW = "brews/add/NEW_BREW";
 const GET_ONE_BREW = 'brews/GET_ONE_BREW'
+const GET_USER_BREWS = 'brews/GET_USER_BREWS'
 const GET_ALL_BREWS = 'brews/GET_ALL_BREWS'
 
 
@@ -17,6 +18,10 @@ const getOneBrew = brew => {
     }
 }
 
+const getUserBrews = brews => {
+    return {type: GET_USER_BREWS, brews}
+}
+
 const getBrews = brews => {
     return { type: GET_ALL_BREWS, brews}
 }
@@ -25,9 +30,16 @@ const getBrews = brews => {
 export const getBrew = brewId => async dispatch => {
     const res = await fetch(`/api/brews/get/${brewId}`)
     const data = await res.json()
-    console.log(data.instructions)
 
     dispatch(getOneBrew(data))
+    return data
+}
+
+export const getBrewList = userId => async dispatch => {
+    const res = await fetch(`/api/users/${userId}/brews`)
+    const data = await res.json()
+
+    dispatch(getUserBrews(data))
     return data
 }
 
@@ -115,10 +127,16 @@ const initialState = {newBrew: null, currentBrew: {}, allBrews: {}, userBrews: {
                 newState = Object.assign({}, state)
                 newState.currentBrew = action.payload
                 return newState
+            case GET_USER_BREWS:
+                action.brews.forEach(brew => {
+                    updateState.userBrews[brew.id] = brew
+                })
+                return updateState
             case GET_ALL_BREWS:
                 action.brews.forEach(brew => {
                     updateState.allBrews[brew.id] = brew
                 })
+                return updateState
             default:
                 return state
     

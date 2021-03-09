@@ -1,8 +1,9 @@
+
+
 const Rotation = () => {
 
     return (
         <>
-        <h1>Hello from the Rotation Page</h1>
         </>
     )
 }

@@ -48,6 +48,5 @@ class User(db.Model, UserMixin):
       'last_name': self.last_name,
       "username": self.username,
       "email": self.email,
-      "brews": [brew.to_dict() for brew in self.brews]
     }
 

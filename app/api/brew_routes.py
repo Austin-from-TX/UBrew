@@ -10,6 +10,7 @@ brew_routes = Blueprint('brews', __name__)
 @brew_routes.route('/get/<int:id>')
 def get_brew(id):
     brew = Brew.query.get(id)
+    print(brew.to_dict())
     return brew.to_dict()
 
 

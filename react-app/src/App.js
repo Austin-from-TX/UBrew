@@ -9,7 +9,7 @@ import User from "./components/User";
 import BrewForm from './components/BrewForm/BrewForm'
 import BrewView from './components/BrewView/BrewView'
 import UserProf from './components/UserProf/userProf'
-import Rotation from './components/Rotation/Rotation'
+import RotationList from './components/RotationList'
 import UserBrews from './components/UserBrews'
 import SearchBrews from './components/SearchBrews'
 import Dashboard from './components/Dashboard'
@@ -22,6 +22,7 @@ function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [display, setDisplay] = useState(true);
+  const [sessionUser, setSessionUser] = useState('')
 
 
   const dispatch = useDispatch()
@@ -32,6 +33,7 @@ function App() {
       if (!user.errors) {
         dispatch(setUser(user));
         setAuthenticated(true);
+        setSessionUser(user)
       }
       setLoaded(true);
     })();
@@ -70,8 +72,8 @@ function App() {
         <ProtectedRoute path="/users/:userId/brews" exact={true} authenticated={authenticated}>
           <UserBrews />
         </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId/rotation" exact={true} authenticated={authenticated}>
-          <Rotation />
+        <ProtectedRoute path="/rotations/:userId"  authenticated={authenticated}>
+          <RotationList user={sessionUser}/>
         </ProtectedRoute>
         <ProtectedRoute path="/brews/add/new" exact={true} authenticated={authenticated}>
           <BrewForm />

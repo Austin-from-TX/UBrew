@@ -2,12 +2,16 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import sessionReducer from "./session";
 import brewReducer from "./brews";
+import rotationsReducer from "./rotations";
+import followsReducer from "./follows";
 
 
 const appReducer = combineReducers({
     // add individual reducer key-value pairs here.
     session: sessionReducer,
-    brew: brewReducer
+    brew: brewReducer,
+    rotation: rotationsReducer,
+    follows: followsReducer
 
 })
 
