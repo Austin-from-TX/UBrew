@@ -1,6 +1,8 @@
 from flask import Blueprint, jsonify
 from flask_login import login_required
-from app.models import User
+from app.models import db, User, Brew, Rotation
+from sqlalchemy import asc
+import json
 
 user_routes = Blueprint('users', __name__)
 
@@ -17,3 +19,21 @@ def users():
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+
+@user_routes.route('/<int:id>/brews')
+@login_required
+def brews(id):
+    brews = Brew.query.filter(Brew.user_id == id).all()
+    data = [brew.to_dict() for brew in brews]
+    res = json.dumps(data)
+    return res
+
+
+@user_routes.route('/<int:id>/rotations')
+@login_required
+def rotations(id):
+    rotations = Rotation.query.filter(Rotation.user_id == id).order_by(asc(Rotation.status)).all()
+    data = [rotation.to_dict() for rotation in rotations]
+    res = json.dumps(data)
+    return res

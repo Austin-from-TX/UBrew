@@ -23,12 +23,13 @@ module.exports = {
       },
 
       red: {
-        
+        light: '#AF2F31',
         DEFAULT: '#711e1f',
         
       },
       brown: {
-        
+
+        light: '#530B0E',
         DEFAULT: '#360709',
         
       }
@@ -40,5 +41,6 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
+    require('@tailwindcss/typography')
   ],
 }

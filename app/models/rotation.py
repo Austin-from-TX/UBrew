@@ -18,5 +18,6 @@ class Rotation(db.Model):
             'id' : self.id,
             'user_id': self.user_id,
             'brew_id': self.brew_id,
-            'status': self.status
+            'status': self.status,
+            'brew': self.brew.to_dict()
         }

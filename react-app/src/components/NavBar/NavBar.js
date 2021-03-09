@@ -14,7 +14,7 @@ const NavBar = ({ setAuthenticated , authenticated, setDisplay }) => {
     <>
     
     <div>
-      <nav className='bg-blue border-b-4 border-brown p-4' >
+      <nav className='bg-blue border-b-8 border-brown p-4 ' >
         <div className="mx-auto px-4 sm:px-6 lg:px-2">
           <div className="flex items-center justify-between h-36">
             <div className="flex items-center">
