@@ -2,15 +2,19 @@ import React, {useEffect, useState} from 'react'
 import { useParams, Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as brewActions from "../../store/brews";
+import CustomModal from "../CustomModal"
+import AddCommentForm from '../AddCommentForm'
 import * as rotationActions from "../../store/rotations"
+import * as commentActions from "../../store/comments"
+import CommentList from '../CommentsList';
 
 const BrewView = () => {
 
     const { brewId } = useParams()
     const dispatch = useDispatch()
     const history = useHistory()
-
     const [loaded, setLoaded] = useState(false);
+    const [showModal, setShowModal] = useState(false)
     const [updateView, setUpdateView] = useState(false);
    
     const currentBrew = useSelector(state => state.brew.currentBrew)
@@ -46,13 +50,22 @@ const BrewView = () => {
         e.preventDefault()
     }
 
+    const newComment = async e => {
+        e.preventDefault()
+        // dispatch(commentActions.addComment)
+    }
+
     if (!loaded) return <span>Loading</span>;
     
     return (
         <>
+            <CustomModal showModal={showModal}>
+                <AddCommentForm setShowModal={setShowModal} brew={currentBrew}/>
+            </CustomModal>
             <div className="grid grid-flow-col grid-cols-2 grid-rows-2 border-4 border-brown flex-col">   
                 <div className='m-4 p-2'>
                     <h1 className='text-5xl text-brown-light font-medium '>{currentBrew.brew_name}</h1>
+                    <Link to={`/users/${currentBrew.user_id}`}><p className='font-black text-brown-light text-xl mt-4'>Creator: {currentBrew.users}</p></Link>
                     <img className='w-80 h-85 mt-6 rounded-xl' src={currentBrew.photos[0].url} alt="brewImage" />
                 </div>
                 {sessionUser.id !== currentBrew.user_id ? (
@@ -69,7 +82,6 @@ const BrewView = () => {
                 </div>    
                 )}
                 <div className='m-8 p-12'>
-                    <Link to={`/users/${currentBrew.user_id}`}><p className='font-black text-brown-light text-xl'>Creator: {currentBrew.users}</p></Link>
                     <p className='text-lg font-medium'><strong className='text-brown-light'>Style: </strong> {currentBrew.style}</p>
                     <p className='text-lg font-medium'> <strong className='text-brown-light'>Original Gravity: </strong>{currentBrew.original_grav}</p>
                     <p className='text-lg font-medium'> <strong className='text-brown-light'>Final Gravity: </strong>{currentBrew.final_grav}</p>
@@ -85,7 +97,11 @@ const BrewView = () => {
                     <article className='prose'>{currentBrew.instructions}</article>
                 </div>
             </div>  
-
+            <div className='flex-col items-stretch w-6/8 border-8 border-brown '>
+                <p>Comments</p>
+                <button onClick={() => setShowModal(true)} className=" m-4 transition duration-500 ease-in-out bg-blue text-yellow hover:bg-brown hover:text-yellow-dark px-4 py-3 rounded-md text-sm"   style={{fontFamily: 'Bourbon Grotesque'}}>Add Comment </button>
+                < CommentList brew={currentBrew} />
+            </div>
             {/* <Instructions instructions={currentBrew.instructions} /> */}
             
         </>

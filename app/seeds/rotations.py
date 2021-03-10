@@ -1,146 +1,175 @@
 from app.models import db, Rotation
+import datetime 
 
 def seed_rotations():
     rotations = [
         {
             "user_id" : 1, 
             "brew_id" : 1, 
-            "status" : 'Drinking'
+            "status" : "Bottom's Up!",
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 1, 
             "brew_id" : 2, 
-            "status" : 'Primary'
+            "status" : 'In Primary',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 1, 
             "brew_id" : 3, 
-            "status" : 'Secondary'
+            "status" : 'In Secondary',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 1, 
             "brew_id" : 14, 
-            "status" : 'On Deck'
+            "status" : 'On Deck',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 2, 
             "brew_id" : 3, 
-            "status" : 'Drinking'
+            "status" : 'Will Brew Soon...',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 2, 
             "brew_id" : 4, 
-            "status" : 'Primary'
+            "status" : 'Conditioning',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 2, 
             "brew_id" : 5, 
-            "status" : 'On Deck'
+            "status" : 'On Deck',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 3, 
             "brew_id" : 5, 
-            "status" : 'Bottled'
+            "status" : 'Conditioning',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 3, 
             "brew_id" : 6, 
-            "status" : 'None'
+            "status" : 'Will Brew Soon...',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 4, 
             "brew_id" : 7, 
-            "status" : 'Drinking'
+            "status" : "Bottom's Up!",
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 4, 
             "brew_id" : 8, 
-            "status" : 'Bottled'
+            "status" : 'Conditioning',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 4, 
             "brew_id" : 14, 
-            "status" : 'On Deck'
+            "status" : 'On Deck',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 4, 
             "brew_id" : 11, 
-            "status" : 'None'
+            "status" : 'Will Brew Soon...',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 5, 
             "brew_id" : 9, 
-            "status" : 'Drinking'
+            "status" : "Bottom's Up",
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 5, 
             "brew_id" : 10, 
-            "status" : 'Fermenting'
+            "status" : 'In Primary',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 5, 
             "brew_id" : 5, 
-            "status" : 'On Deck'
+            "status" : 'On Deck',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 6, 
             "brew_id" : 11, 
-            "status" : 'Drinking'
+            "status" : "Bottom's Up",
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 6, 
             "brew_id" : 11, 
-            "status" : 'Fermenting'
+            "status" : 'Conditioning',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 6, 
             "brew_id" : 11, 
-            "status" : 'On Deck'
+            "status" : 'On Deck',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 7, 
             "brew_id" : 12, 
-            "status" : 'Drinking'
+            "status" : 'Conditioning',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 7, 
             "brew_id" : 4, 
-            "status" : 'On Deck'
+            "status" : 'In Secondary',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 7, 
             "brew_id" : 7, 
-            "status" : 'Fermenting'
+            "status" : 'In Primary',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 8, 
             "brew_id" : 13, 
-            "status" : 'Fermenting'
+            "status" : 'In Secondary',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 8, 
             "brew_id" : 14, 
-            "status" : 'On Deck'
+            "status" : 'On Deck',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 9, 
             "brew_id" : 14, 
-            "status" : 'Drinking'
+            "status" :  "Bottom's Up!",
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 9, 
             "brew_id" : 1, 
-            "status" : 'On Deck'
+            "status" : 'Will Brew Soon...',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 9, 
             "brew_id" : 6, 
-            "status" : 'On Deck'
+            "status" : 'Will Brew Soon...',
+            'updated_at': datetime.datetime.now()
         },
         {
             "user_id" : 9, 
             "brew_id" : 5, 
-            "status" : 'On Deck'
+            "status" : 'On Deck',
+            'updated_at': datetime.datetime.now()
         },
     ]
 

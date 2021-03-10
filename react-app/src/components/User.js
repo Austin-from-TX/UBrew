@@ -8,13 +8,14 @@ import RotationList from './RotationList'
 
 function User() {
   const [user, setUser] = useState({});
-  const [follow, setFollow] = useState(false)
+
 
   // Notice we use useParams here instead of getting the params
   // From props.
   const { userId }  = useParams();
   const dispatch = useDispatch()
   const sessionUser = useSelector(state => state.session.user)
+  // const followUser = useSelector(state => state.follow.userFollows)
   // console.log('session', sessionUserId)
   useEffect(() => {
     if (!userId) {
@@ -27,6 +28,10 @@ function User() {
     })();
   }, [userId]);
 
+  useEffect(() => {
+    // if(!userId) return 
+    // dispatch(followActions.findFollower({user_id: userId}))
+  })
 
   const addFollow = async e => {
     e.preventDefault()
@@ -34,13 +39,14 @@ function User() {
 
   }
 
+  // if(!followUser) return <div>Loading</div>
 
   if (!user) {
     return null;
   }
 
   return (
-    <>
+    <p>
     
     <ul>
       
@@ -68,7 +74,7 @@ function User() {
         <button  onClick={addFollow} className="transition duration-500 ease-in-out text-yellow bg-blue hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-xl text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Follow</button> 
       </div>
       }
-    </>
+    </p>
   );
 }
 export default User;

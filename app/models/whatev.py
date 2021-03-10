@@ -1,9 +1,3 @@
-from .db import db
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
-from .follow import follows
-
-
 class User(db.Model, UserMixin):
   __tablename__ = 'users'
 
@@ -26,43 +20,24 @@ class User(db.Model, UserMixin):
         backref=db.backref("follows", lazy="dynamic"),
         lazy="dynamic"
     )
-  # followed = db.relationship(
-  #       "User", 
-  #       secondary=follows,
-  #       primaryjoin=(follows.c.followed_id == id),
-  #       secondaryjoin=(follows.c.follower_id == id),
-  #       backref=db.backref("follows", lazy="dynamic"),
-  #       lazy="dynamic"
-  #   )
 
-  @property
-  def password(self):
-    return self.hashed_password
+    def follow_to_dict(self):
+        return: {
+            "id": self.id, 
+            "username": self.username,
+            "rotation": [rotation.to_dict() for rotation in self.rotation],
+            "followers" : {user.id: user.follow_to_dict() for user in self.followers}
+
+        }
 
 
-  @password.setter
-  def password(self, password):
-    self.hashed_password = generate_password_hash(password)
 
-
-  def check_password(self, password):
-    return check_password_hash(self.password, password)
-
-
-  def follow_to_dict(self):
-      return {
-        "id": self.id, 
-        "username": self.username,
-        "rotation": [rotation.to_dict() for rotation in self.rotation],
-        "followers" : {user.id: user.follow_to_dict() for user in self.followers}
-       }
-
-  def to_dict(self):
+      def to_dict(self):
     return {
       "id": self.id,
       'first_name': self.first_name,
       'last_name': self.last_name,
       "username": self.username,
       "email": self.email,
+      "followers" : {user.id: user.follow_to_dict() for user in self.followers}
     }
-
