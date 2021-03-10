@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import * as followActions from '../store/follows'
 import BrewList from './BrewList'
 import RotationList from './RotationList'
 
@@ -12,6 +13,7 @@ function User() {
   // Notice we use useParams here instead of getting the params
   // From props.
   const { userId }  = useParams();
+  const dispatch = useDispatch()
   const sessionUser = useSelector(state => state.session.user)
   // console.log('session', sessionUserId)
   useEffect(() => {
@@ -25,6 +27,12 @@ function User() {
     })();
   }, [userId]);
 
+
+  const addFollow = async e => {
+    e.preventDefault()
+    await dispatch(followActions.newFollow({follower_id: sessionUser.id, followed_id: userId}))
+
+  }
 
 
   if (!user) {
@@ -47,16 +55,19 @@ function User() {
       </li>
       <BrewList />
       
-      <li>
-        <strong>{user.username}'s Rotation:</strong>
-      </li>
-      <RotationList user={user}/>
+      
+      
     </ul>
-    {sessionUser && sessionUser.id === userId ? 
+    {sessionUser && sessionUser.id == userId ? 
       
       ( <div></div>)
         :  
-    ( <button className="transition duration-500 ease-in-out text-yellow bg-blue hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-xl text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Follow</button> )}
+        <div>
+        <p>See what {user.username} has got brewing </p>
+        <button>View {user.username}'s Rotation </button>
+        <button  onClick={addFollow} className="transition duration-500 ease-in-out text-yellow bg-blue hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-xl text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Follow</button> 
+      </div>
+      }
     </>
   );
 }

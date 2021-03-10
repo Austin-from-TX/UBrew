@@ -77,14 +77,9 @@ const rotationsReducer = (state = initialState, action) => {
     const updateState = {...state}
     switch (action.type) {
         case NEW_ROTATION:
-            // newState= Object.assign({}, state)
             updateState.userRotations = action.rotation
             return updateState
         case USER_ROTATIONS:
-            // action.rotations.forEach(rotation => {
-            //     updateState.userRotations[rotation.id] = rotation
-            // })
-
             updateState.rotations = [...action.rotations]
             return updateState;
         case UPDATE_ROTATION:

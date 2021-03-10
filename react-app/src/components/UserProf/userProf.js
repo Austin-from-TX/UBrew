@@ -10,6 +10,9 @@ const UserProf = () => {
     return (
         <>
           <h1>Hello {user.username} from Your User Page </h1>
+
+
+          //Fire query to my followers 
         </>
     )
 }

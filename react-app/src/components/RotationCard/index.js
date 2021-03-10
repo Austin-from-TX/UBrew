@@ -43,10 +43,10 @@ export default function RotationCard({photo,
     return (
         <>
         <div className='flex w-2/3 self-center m-8 border-2 border-red rounded-lg' >
-            <Link to={`/brews/${brew_id}`}><img className='w-36 h-44  m-4 flex-1 rounded-3xl' src={photo} alt='beer_img' /></Link>
+            <Link to={`/brews/${brew_id}`}><img className='w-36 h-44  m-4 flex-auto rounded-3xl' src={photo} alt='beer_img' /></Link>
             <div className='flex-1 flex-col p-10 space-y-6 text-left'>
                 <Link to={`/brews/${brew_id}`}><p className='font-black text-brown text-2xl'>{brew_name} </p></Link>
-                <Link to={`/user/${creator_id}`}><p className='font-black text-brown-light text-md'>Creator: {creator} </p></Link>
+                <Link to={`/users/${creator_id}`}><p className='font-black text-brown-light text-md'>Creator: {creator} </p></Link>
                 <div className='flex space-x-4'>
                     <p className="text-xs font-black text-brown-light">ABV: {abv}%</p>
                     <p className="text-xs font-black text-brown-light">IBU: {ibu}</p>
