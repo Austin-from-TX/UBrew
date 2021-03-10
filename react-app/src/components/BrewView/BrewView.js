@@ -37,9 +37,13 @@ const BrewView = () => {
          history.push(`/rotations/${sessionUser.id}`) 
     }
 
-    const editRec = async e => {
+    const editRecipe = async e => {
         e.preventDefault()
         
+    }
+
+    const deleteRecipe = async e => {
+        e.preventDefault()
     }
 
     if (!loaded) return <span>Loading</span>;
@@ -60,8 +64,8 @@ const BrewView = () => {
                     :(
                 <div className='flex-col space-y-10 m-6'>
                     <p className='text-brown-light text-lg'>Want to make changes or remove your recipe?  Do so here: </p>
-                    <button onClick={editRec} className=" m-4 transition duration-500 ease-in-out bg-blue text-yellow hover:bg-brown hover:text-yellow-dark px-4 py-3 rounded-md text-sm"   style={{fontFamily: 'Bourbon Grotesque'}}>Edit</button>
-                    <button onClick={deleteRec} className=" m-4 transition duration-500 ease-in-out bg-red text-yellow hover:bg-red-light hover:text-yellow-dark px-4 py-3 rounded-md text-sm"   style={{fontFamily: 'Bourbon Grotesque'}}>Delete</button>
+                    <button onClick={editRecipe} className=" m-4 transition duration-500 ease-in-out bg-blue text-yellow hover:bg-brown hover:text-yellow-dark px-4 py-3 rounded-md text-sm"   style={{fontFamily: 'Bourbon Grotesque'}}>Edit</button>
+                    <button onClick={deleteRecipe} className=" m-4 transition duration-500 ease-in-out bg-red text-yellow hover:bg-red-light hover:text-yellow-dark px-4 py-3 rounded-md text-sm"   style={{fontFamily: 'Bourbon Grotesque'}}>Delete</button>
                 </div>    
                 )}
                 <div className='m-8 p-12'>
