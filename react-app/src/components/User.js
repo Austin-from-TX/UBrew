@@ -8,6 +8,7 @@ import RotationList from './RotationList'
 
 function User() {
   const [user, setUser] = useState({});
+  const [follows, setFollows] = useState()
 
 
   // Notice we use useParams here instead of getting the params
@@ -15,8 +16,9 @@ function User() {
   const { userId }  = useParams();
   const dispatch = useDispatch()
   const sessionUser = useSelector(state => state.session.user)
-  // const followUser = useSelector(state => state.follow.userFollows)
-  // console.log('session', sessionUserId)
+  const userFollows = useSelector(state => state.follows.userFollows)
+
+ 
   useEffect(() => {
     if (!userId) {
       return
@@ -24,14 +26,14 @@ function User() {
     (async () => {
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
+      dispatch(followActions.getFollowerList({user_id: sessionUser.id}))
       setUser(user);
     })();
   }, [userId]);
 
-  useEffect(() => {
-    // if(!userId) return 
-    // dispatch(followActions.findFollower({user_id: userId}))
-  })
+  if (userFollows.includes(user)){
+    setFollows(true)
+  }
 
   const addFollow = async e => {
     e.preventDefault()
@@ -71,7 +73,11 @@ function User() {
         <div>
         <p>See what {user.username} has got brewing </p>
         <button>View {user.username}'s Rotation </button>
+        {follows ? 
+        <button  onClick={addFollow} className="transition duration-500 ease-in-out text-yellow bg-blue hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-xl text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>UnFollow</button> 
+        :
         <button  onClick={addFollow} className="transition duration-500 ease-in-out text-yellow bg-blue hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-xl text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Follow</button> 
+        }
       </div>
       }
     </p>

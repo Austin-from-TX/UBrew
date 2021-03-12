@@ -10,7 +10,7 @@ const customStyles = {
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       padding: "1.5em",
-      borderRadius: "2px",
+      borderRadius: "20px",
       border: "none",
       width: "40%",
       boxSizing: "border-box",

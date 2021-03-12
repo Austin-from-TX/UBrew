@@ -41,8 +41,14 @@ def login():
     if form.validate_on_submit():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.email == form.data['email']).first()
+        following = user.followers
+        followers = user.follows
         login_user(user)
-        return user.to_dict()
+        user = user.to_dict()
+        user["following"] = [follower.to_dict() for follower in followers]
+        user["followers"] = [follow.to_dict() for follow in following]
+        print('---------------USER', user)
+        return user
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

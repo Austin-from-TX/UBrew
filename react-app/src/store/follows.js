@@ -1,10 +1,14 @@
 const NEW_FOLLOWER = 'follows/NEW_FOLLOWER'
+const DELETE_FOLLOWER = 'follows/DELETE_FOLLOWER'
 const IS_FOLLOWED = 'follows/IS_FOLLOWED'
 const FOLLOWED_LIST = 'follows/FOLLOWED_LIST'
+const FOLLOWING_LIST = 'follows/FOLLOWING_LIST'
 
 const addFollow = user => {
-    console.log('addFollow', user)
     return { type: NEW_FOLLOWER, user}
+}
+const deleteFollow = user => {
+    return { type: DELETE_FOLLOWER, user}
 }
 
 const isFollowed = user => {
@@ -12,8 +16,32 @@ const isFollowed = user => {
     return { type: IS_FOLLOWED, user}
 }
 
-const followerList = users => {
-    return { type: FOLLOWED_LIST, users}
+const followerList = (followers) => {
+    return { 
+        type: FOLLOWED_LIST, 
+        followers
+    }
+}
+const followingList = (following) => {
+    return { 
+        type: FOLLOWING_LIST, 
+        following
+    }
+}
+
+export const removeFollower = ({follower_id, following_id}) => async dispatch => {
+    console.log('followerid from the thunk', following_id)
+    const res = await fetch(`api/follows/${follower_id}/delete`, {
+        method: 'DELETE', 
+        headers: {
+            "Content-Type": 'application/json'
+        }, 
+        body: JSON.stringify({following_id})
+    })
+    const data = await res.json()
+    console.log(data)
+    dispatch(deleteFollow(data))
+    return data
 }
 
 export const newFollow = ({follower_id, followed_id}) => async dispatch => {
@@ -25,7 +53,7 @@ export const newFollow = ({follower_id, followed_id}) => async dispatch => {
         body: JSON.stringify({follower_id, followed_id})
     })
     const data = await res.json()
-    dispatch(newFollow(data))
+    dispatch(addFollow(data))
     return data 
 }
 
@@ -40,7 +68,8 @@ export const getFollowerList = ({user_id}) => async dispatch => {
     console.log('from the thunk', user_id)
     const res = await fetch(`/api/follows/${user_id}/get`)
     const data = await res.json()
-    dispatch(followerList(data))
+    dispatch(followingList(data[0]))
+    dispatch(followerList(data[1]))
     return data
 }
 
@@ -52,13 +81,17 @@ const followReducer = (state = initialState, action) => {
     let newState;
     const updateState = {...state}
     switch(action.type) {
+        case FOLLOWING_LIST:
+                updateState.userFollows = action.following;
+            return updateState
         case FOLLOWED_LIST:
-            action.users.forEach(user => {
-                updateState.userFollows[user.id] = user;
-            });
+                updateState.userFollowers = action.followers;
             return updateState
         case NEW_FOLLOWER: 
-            updateState.userFollows =action.user
+            updateState.userFollows = action.user
+            return updateState
+        case DELETE_FOLLOWER:
+            updateState.userFollows = action.user
             return updateState
         case IS_FOLLOWED: 
             updateState.userFollows =action.user

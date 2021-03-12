@@ -18,22 +18,15 @@ class User(db.Model, UserMixin):
   brews = db.relationship("Brew", back_populates="users")
   photos = db.relationship("Photo", back_populates="user")
   comment = db.relationship("Comment", back_populates="user")
-  followers = db.relationship(
+  follows = db.relationship(
         "User", 
         secondary=follows,
-        primaryjoin=(follows.c.follower_id == id),
-        secondaryjoin=(follows.c.followed_id == id),
-        backref=db.backref("follows", lazy="dynamic"),
+        primaryjoin=(follows.c.followed_id == id),
+        secondaryjoin=(follows.c.follower_id == id),
+        backref=db.backref("followers", lazy="dynamic"),
         lazy="dynamic"
     )
-  # followed = db.relationship(
-  #       "User", 
-  #       secondary=follows,
-  #       primaryjoin=(follows.c.followed_id == id),
-  #       secondaryjoin=(follows.c.follower_id == id),
-  #       backref=db.backref("follows", lazy="dynamic"),
-  #       lazy="dynamic"
-  #   )
+ 
 
   @property
   def password(self):
@@ -48,14 +41,6 @@ class User(db.Model, UserMixin):
   def check_password(self, password):
     return check_password_hash(self.password, password)
 
-
-  def follow_to_dict(self):
-      return {
-        "id": self.id, 
-        "username": self.username,
-        "rotation": [rotation.to_dict() for rotation in self.rotation],
-        "followers" : {user.id: user.follow_to_dict() for user in self.followers}
-       }
 
   def to_dict(self):
     return {
