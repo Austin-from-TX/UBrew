@@ -10,7 +10,6 @@ import BrewForm from './components/BrewForm/BrewForm'
 import BrewView from './components/BrewView/BrewView'
 import UserProf from './components/UserProf/userProf'
 import RotationList from './components/RotationList'
-import UserBrews from './components/UserBrews'
 import SearchBrews from './components/SearchBrews'
 import Dashboard from './components/Dashboard'
 import ProtectedRoute from "./components/auth/ProtectedRoute";
@@ -49,7 +48,11 @@ function App() {
       {loaded && (
       <Switch>
         <Route exact path="/" >
+        {!authenticated ? 
             <Home display={display} />
+            :
+           <UserProf display={display} />
+        }
         </Route>
         <Route path="/login" exact={true}>
           <LoginForm
@@ -66,12 +69,6 @@ function App() {
         <Route path="/sign-up" exact={true}>
           <SignUpForm authenticated={authenticated} setAuthenticated={setAuthenticated} />
         </Route>
-        <ProtectedRoute path="/dashboard" exact={true} authenticated={authenticated}>
-          <Dashboard />
-        </ProtectedRoute>
-        <ProtectedRoute path="/users/:userId/brews" exact={true} authenticated={authenticated}>
-          <UserBrews />
-        </ProtectedRoute>
         <ProtectedRoute path="/rotations/:userId"  authenticated={authenticated}>
           <RotationList user={sessionUser}/>
         </ProtectedRoute>

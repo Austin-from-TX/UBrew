@@ -1,8 +1,9 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
 from app.models import db, User, Brew, Rotation
 from app.forms import RotationForm
 from sqlalchemy import asc
+import datetime
 import json
 
 rotation_routes = Blueprint('rotations', __name__)
@@ -17,11 +18,14 @@ def add_rotation():
         rotation = Rotation(
             user_id=form.data['user_id'],
             brew_id=form.data['brew_id'],
-            status=form.data['status']
+            status=form.data['status'],
+            updated_at=datetime.datetime.now()
+
         )
         db.session.add(rotation)
         db.session.commit()
-        return rotation.to_dict()
+        data = rotation.to_dict()
+        return jsonify(data)
 
 
 @rotation_routes.route('/<int:id>/edit', methods=["PUT"])
@@ -30,12 +34,15 @@ def edit_status(id):
     rotation = Rotation.query.get(id)
 
     rotation.status = request.get_json()['status']
-    user_id = request.get_json()['user_id']
+    rotation.updated_at = datetime.datetime.now()
 
     db.session.commit()
+    
+    user_id = request.get_json()['user_id']
+   
     rotations = Rotation.query.filter(Rotation.user_id == user_id).order_by(asc(Rotation.status)).all()
     data = [rotation.to_dict() for rotation in rotations]
-    return json.dumps(data)
+    return jsonify(data)
 
 
 @rotation_routes.route('/<int:id>/delete', methods=["DELETE"])
@@ -50,4 +57,4 @@ def delete_rotatation(id):
     
     rotations = Rotation.query.filter(Rotation.user_id == user_id).order_by(asc(Rotation.status)).all()
     data = [rotation.to_dict() for rotation in rotations]
-    return json.dumps(data)
+    return jsonify(data)

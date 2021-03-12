@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, Response
 from flask_login import login_required
 from app.forms import BrewForm
 from app.models import db, Brew
@@ -10,7 +10,6 @@ brew_routes = Blueprint('brews', __name__)
 @brew_routes.route('/get/<int:id>')
 def get_brew(id):
     brew = Brew.query.get(id)
-    print(brew.to_dict())
     return brew.to_dict()
 
 
@@ -50,3 +49,12 @@ def add_brew():
         
         return brew.to_dict()
     return form.errors     
+
+@brew_routes.route('/<int:id>/delete')
+@login_required
+def delete_brew(id):
+    brew = Brew.query.get(id)
+    db.sessions.delete(brew)
+    db.session.commit()
+
+    return Response("{'a':'b'}", status=201, mimetype='application/json')

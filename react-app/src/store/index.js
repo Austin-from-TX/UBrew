@@ -4,6 +4,7 @@ import sessionReducer from "./session";
 import brewReducer from "./brews";
 import rotationsReducer from "./rotations";
 import followsReducer from "./follows";
+import commentsReducer from "./comments";
 
 
 const appReducer = combineReducers({
@@ -11,7 +12,8 @@ const appReducer = combineReducers({
     session: sessionReducer,
     brew: brewReducer,
     rotation: rotationsReducer,
-    follows: followsReducer
+    follows: followsReducer,
+    comments: commentsReducer
 
 })
 

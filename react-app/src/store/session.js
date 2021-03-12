@@ -6,6 +6,7 @@ export const userLogout = () => {
 }
 
 export const setUser = (user) => {
+  console.log('FROM THE ACTION', user)
   return { type: SET_USER, user };
 };
 

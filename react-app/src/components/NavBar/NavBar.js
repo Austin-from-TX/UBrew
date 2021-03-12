@@ -22,7 +22,7 @@ const NavBar = ({ setAuthenticated , authenticated, setDisplay }) => {
               {!authenticated && <NavLink to='/' exact={true} activeclassName="active">
             <img src={logo} className="h-36 w-36"/>
           </NavLink>}
-          {authenticated && <NavLink to={`/dashboard`} exact={true} activeclassName="active">
+          {authenticated && <NavLink to={`/`} exact={true} activeclassName="active">
            <img className="h-36 w-36" src={logo}  />
           </NavLink>}
                 
