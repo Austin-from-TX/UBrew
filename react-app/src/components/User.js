@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import * as followActions from '../store/follows'
 import BrewList from './BrewList'
+import {Link} from 'react-router-dom'
 import RotationList from './RotationList'
 
 
 function User() {
   const [user, setUser] = useState({});
-  const [follows, setFollows] = useState()
+  
 
 
   // Notice we use useParams here instead of getting the params
@@ -18,6 +19,7 @@ function User() {
   const sessionUser = useSelector(state => state.session.user)
   const userFollows = useSelector(state => state.follows.userFollows)
 
+  console.log('userFollows', userFollows)
  
   useEffect(() => {
     if (!userId) {
@@ -26,14 +28,12 @@ function User() {
     (async () => {
       const response = await fetch(`/api/users/${userId}`);
       const user = await response.json();
-      dispatch(followActions.getFollowerList({user_id: sessionUser.id}))
       setUser(user);
+      await dispatch(followActions.getFollowerList({user_id: sessionUser.id}))
     })();
   }, [userId]);
 
-  if (userFollows.includes(user)){
-    setFollows(true)
-  }
+
 
   const addFollow = async e => {
     e.preventDefault()
@@ -41,11 +41,16 @@ function User() {
 
   }
 
-  // if(!followUser) return <div>Loading</div>
-
+  const followed = userFollows.filter(user => user.id == userId)
+  
   if (!user) {
     return null;
   }
+  if(!userFollows) return <div>Loading</div>
+
+  // const followed = userFollows.filter(user => (
+  //   user.id == userId
+  // ))
 
   return (
     <p>
@@ -72,12 +77,20 @@ function User() {
         :  
         <div>
         <p>See what {user.username} has got brewing </p>
-        <button>View {user.username}'s Rotation </button>
-        {follows ? 
+        <Link to={`/rotations/${user.id}`}>
+          <button>View {user.username}'s Rotation </button>
+        </Link>
+        {/* {followed ? 
         <button  onClick={addFollow} className="transition duration-500 ease-in-out text-yellow bg-blue hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-xl text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>UnFollow</button> 
         :
         <button  onClick={addFollow} className="transition duration-500 ease-in-out text-yellow bg-blue hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-xl text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Follow</button> 
-        }
+        } */}
+
+        {followed.length ?
+          <button> UnFollow </button> :
+          <button> Follow </button>
+    }
+
       </div>
       }
     </p>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import * as rotationActions from '../../store/rotations'
 
@@ -28,6 +28,7 @@ export default function RotationCard({photo,
     
     const [status, setStatus] = useState(rotation_status)
 
+    const sessionUser = useSelector(state => state.session.user)
     const dispatch = useDispatch()
 
     const onEdit = (e) => {
@@ -55,7 +56,9 @@ export default function RotationCard({photo,
                 <p className='font-black text-red text-lg'>Status: {rotation_status} </p>
                 {/* <button className="transition duration-500 ease-in-out bg-blue text-yellow hover:bg-brown hover:text-yellow-dark px-4 py-3 rounded-md text-sm" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>View Recipe</button> */}
             </div>
-            <div className='flex-col flex-1 p-2 m-4 space-y-6 self-center text-center'>
+            {sessionUser.id == user_id && (
+                <>
+                <div className='flex-col flex-1 p-2 m-4 space-y-6 self-center text-center'>
             <label className='font-black text-brown-light'> Select Status</label>
             <select
                 value={status}
@@ -72,10 +75,12 @@ export default function RotationCard({photo,
                 ))}
                 </select>
                 <button onClick={onEdit} className=" m-4 transition duration-500 ease-in-out bg-blue text-yellow hover:bg-brown hover:text-yellow-dark px-4 py-3 rounded-md text-sm"   style={{fontFamily: 'Bourbon Grotesque'}} >Set Status</button>
-            </div>
             <div className="m-8 self-center">
                 <button onClick={onDelete} className="m-4 transition duration-500 ease-in-out bg-red text-yellow hover:bg-red-light hover:text-yellow-dark px-4 py-3 rounded-md text-sm"  style={{fontFamily: 'Bourbon Grotesque'}}>Remove</button>
             </div>
+            </div>
+            </>
+            )}
         </div>
         </>
     )

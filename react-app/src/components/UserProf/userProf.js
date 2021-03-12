@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import * as followActions from '../../store/follows'
+import * as rotationActions from '../../store/rotations'
 import FollowsList from '../FollowsList'
-import FollowersList from '../FollowersList'
 import CustomModal from '../CustomModal'
 import UserFeed from '../UserFeed'
 
@@ -11,43 +11,53 @@ const UserProf = () => {
 
     const [loaded, setLoaded] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [follows, setFollows] = useState('');
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
     const followed = useSelector(state => state.follows.userFollows)
     const followers = useSelector(state => state.follows.userFollowers)
-
+    const feed = useSelector(state => state.rotation.feed)
     
-    const getFollowers = async () => {
+    const getState = async () => {
       await dispatch(followActions.getFollowerList({user_id: user.id}))
+      await dispatch(rotationActions.getFeedRotation(user.id))
+      
       setLoaded(true)
     }
+  
+   
     
     useEffect(() => {
-      getFollowers()
+      getState()
     }, [dispatch])
     
-    // console.log('followers', followers)
-    // console.log('followed', followed)
+    const clickHandler = (e, type) => {
+      e.preventDefault()
+      setFollows(type)
+      setShowModal(true)
+    }
 
     if (!loaded) return <span>Loading</span>;
 
     return (
-        <>
+        <>  
           <h1>Hello {user.username} from Your User Page </h1>
-          {/* <button onClick={e => setShowModal(true)} >See Who Follows You</button>
+          <button onClick={(e) => clickHandler(e, "followers")} >See Who Follows You</button>
           <div>
           <CustomModal showModal={showModal} >
-            <FollowersList followers={followers} setShowModal={setShowModal} /> 
-          </CustomModal>
-          </div> */}
-          <div>
-         <button onClick={e => setShowModal(true)} >See Who You're Following </button>
-         <CustomModal showModal={showModal} >
-          <FollowsList follows={followed} setShowModal={setShowModal} /> 
+            <FollowsList follows={follows === "followed" ? followed : followers } setShowModal={setShowModal} /> 
           </CustomModal>
           </div>
-          <UserFeed />
+          <div>
+         <button onClick={(e) => clickHandler(e, "followed")} 
+        >See Who You're Following </button>
+         </div>
+         {/* <CustomModal showModal={showFollowersModal} >
+          <FollowsList follows={followed} setShowModal={setShowFollowersModal} /> 
+          </CustomModal> */}
+         
+          <UserFeed feed={feed}/>
 
 
 

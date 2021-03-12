@@ -74,7 +74,7 @@ export const getFollowerList = ({user_id}) => async dispatch => {
 }
 
 
-const initialState = {user: {}, userFollows: {}, userFollowers: {}}
+const initialState = {user: {}, userFollows: [], userFollowers: []}
 
 
 const followReducer = (state = initialState, action) => {
