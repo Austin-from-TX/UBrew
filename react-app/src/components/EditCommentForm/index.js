@@ -2,7 +2,7 @@ import React, { useState} from 'react'
 import {useDispatch} from 'react-redux'
 import * as commentActions from '../../store/comments'
 
-export default function EditForm({comment, setShowModal}){
+export default function EditCommentForm({comment, setShowModal}){
 
     const [newComment, setComment] = useState(comment.comment)
     

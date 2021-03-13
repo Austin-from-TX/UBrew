@@ -3,6 +3,8 @@ import { useParams, Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as brewActions from "../../store/brews";
 import CustomModal from "../CustomModal"
+import EditBrewForm from '../EditBrewForm'
+import DeleteBrewForm from '../DeleteBrewForm'
 import AddCommentForm from '../AddCommentForm'
 import * as rotationActions from "../../store/rotations"
 import * as commentActions from "../../store/comments"
@@ -15,6 +17,8 @@ const BrewView = () => {
     const history = useHistory()
     const [loaded, setLoaded] = useState(false);
     const [showModal, setShowModal] = useState(false)
+    const [showBrewModal, setShowBrewModal] = useState(false)
+    const [showDeleteModal, setShowDeleteModal] = useState(false)
     const [updateView, setUpdateView] = useState(false);
    
     const currentBrew = useSelector(state => state.brew.currentBrew)
@@ -46,21 +50,18 @@ const BrewView = () => {
         
     }
 
-    const deleteRecipe = async e => {
-        e.preventDefault()
-    }
-
-    const newComment = async e => {
-        e.preventDefault()
-        // dispatch(commentActions.addComment)
-    }
-
     if (!loaded) return <span>Loading</span>;
     
     return (
         <>
             <CustomModal showModal={showModal}>
                 <AddCommentForm setShowModal={setShowModal} brew={currentBrew}/>
+            </CustomModal>
+            <CustomModal showModal={showBrewModal}>
+                <EditBrewForm setShowBrewModal={setShowBrewModal} brew={currentBrew}/>
+            </CustomModal>
+            <CustomModal showModal={showDeleteModal}>
+                <DeleteBrewForm setShowDeleteModal={setShowDeleteModal} brew={currentBrew}/>
             </CustomModal>
             <div className="grid grid-flow-col grid-cols-2 grid-rows-2 border-4 border-brown flex-col">   
                 <div className='m-4 p-2'>
@@ -77,8 +78,8 @@ const BrewView = () => {
                     :(
                 <div className='flex-col space-y-10 m-6'>
                     <p className='text-brown-light text-lg'>Want to make changes or remove your recipe?  Do so here: </p>
-                    <button onClick={editRecipe} className=" m-4 transition duration-500 ease-in-out bg-blue text-yellow hover:bg-brown hover:text-yellow-dark px-4 py-3 rounded-md text-sm"   style={{fontFamily: 'Bourbon Grotesque'}}>Edit</button>
-                    <button onClick={deleteRecipe} className=" m-4 transition duration-500 ease-in-out bg-red text-yellow hover:bg-red-light hover:text-yellow-dark px-4 py-3 rounded-md text-sm"   style={{fontFamily: 'Bourbon Grotesque'}}>Delete</button>
+                    <button onClick={e => setShowBrewModal(true)} className=" m-4 transition duration-500 ease-in-out bg-blue text-yellow hover:bg-brown hover:text-yellow-dark px-4 py-3 rounded-md text-sm"   style={{fontFamily: 'Bourbon Grotesque'}}>Edit</button>
+                    <button onClick={e => setShowDeleteModal(true)} className=" m-4 transition duration-500 ease-in-out bg-red text-yellow hover:bg-red-light hover:text-yellow-dark px-4 py-3 rounded-md text-sm"   style={{fontFamily: 'Bourbon Grotesque'}}>Delete</button>
                 </div>    
                 )}
                 <div className='m-8 p-12'>

@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request, Response
 from flask_login import login_required
 from app.forms import BrewForm
 from app.models import db, Brew
+from datetime import datetime 
 import json
 
 brew_routes = Blueprint('brews', __name__)
@@ -41,14 +42,46 @@ def add_brew():
             abv=form.data['abv'],
             ibu=form.data['ibu'],
             srm=form.data['srm'],
-            instructions=form.data['instructions'],        
+            grain_bill=form.data['grain_bill'],
+            hop_list=form.data['hop_list'],
+            instructions=form.data['instructions'], 
+            created_at=datetime.now(),
+            updated_at=datetime.now()       
         )
 
         db.session.add(brew)
         db.session.commit()
         
         return brew.to_dict()
-    return form.errors     
+    return form.errors    
+
+
+@brew_routes.route('/<int:id>/edit', methods=['PUT'])
+@login_required
+def edit_brew(id):
+        brew = Brew.query.get(id)
+
+            
+        brew.style=request.get_json()['style'],
+        brew_name=request.get_json()['brew_name'],
+        description=request.get_json()['description'],
+        original_grav=request.get_json()['original_grav'],
+        final_grav=request.get_json()['final_grav'],
+        ferm_temp=request.get_json()['ferm_temp'],
+        primary_len=request.get_json()['primary_len'],
+        secondary_len=request.get_json()['secondary_len'],
+        abv=request.get_json()['abv'],
+        ibu=request.get_json()['ibu'],
+        srm=frequest.get_json()['srm'],
+        instructions=request.get_json()['instructions'], 
+        grain_bill=request.get_json()['grain_bill'], 
+        hop_list=request.get_json()['hop_list'],
+        updated_at=datetime.now()       
+        
+        db.session.commit()
+        
+        return brew.to_dict()
+    
 
 @brew_routes.route('/<int:id>/delete')
 @login_required

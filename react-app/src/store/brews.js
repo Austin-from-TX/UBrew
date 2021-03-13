@@ -60,7 +60,7 @@ export const getAllBrews = () => async dispatch => {
     dispatch(getBrews(data))
     return data
 }
-export const removeBrew = id => async dispatch => {
+export const removeBrew = ({id}) => async dispatch => {
     const res = await fetch(`/api/brews/${id}/delete`, {
         method: "DELETE",
         headers: {
@@ -87,6 +87,8 @@ export const makeEdit = ( {
     abv,
     ibu,
     srm,
+    grain_bill,
+    hop_list,
     instructions,
     photo
     } ) => async dispatch => {
@@ -109,6 +111,8 @@ export const makeEdit = ( {
                 abv,
                 ibu,
                 srm,
+                grain_bill,
+                hop_list,
                 instructions
                 })
         })
@@ -151,6 +155,8 @@ export const addBrew = (brewSubmit) => async (dispatch) => {
         abv,
         ibu,
         srm,
+        grain_bill,
+        hop_list,
         instructions,
         photo
         } = brewSubmit
@@ -173,6 +179,8 @@ export const addBrew = (brewSubmit) => async (dispatch) => {
             abv,
             ibu,
             srm,
+            grain_bill,
+            hop_list,
             instructions
             })
     })

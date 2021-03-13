@@ -9,6 +9,25 @@ import json
 rotation_routes = Blueprint('rotations', __name__)
 
 
+@rotation_routes.route('/following/<int:id>')
+@login_required
+def follow_rotation(id):
+    user = User.query.get(id)
+
+    # following = [follow.id for follow in user.followers]
+    # print('---------following-------', following)
+
+    # feed = []
+
+    # for follow in following:
+    #     post
+    
+    # Rotation.query.filter(Rotation.user_id == user_id).order_by(asc(Rotation.status)).all()
+    
+   
+    rotations = [{**follower.to_dict(), "rotations": [r.to_dict() for r in follower.rotations] } for follower in user.followers]
+    return jsonify({"followed_rotations": rotations})
+
 @rotation_routes.route('/add', methods=["POST"])
 @login_required
 def add_rotation():
@@ -19,7 +38,7 @@ def add_rotation():
             user_id=form.data['user_id'],
             brew_id=form.data['brew_id'],
             status=form.data['status'],
-            updated_at=datetime.datetime.now()
+            updated_at=datetime.now()
 
         )
         db.session.add(rotation)
@@ -34,7 +53,7 @@ def edit_status(id):
     rotation = Rotation.query.get(id)
 
     rotation.status = request.get_json()['status']
-    rotation.updated_at = datetime.datetime.now()
+    rotation.updated_at = datetime.now()
 
     db.session.commit()
     

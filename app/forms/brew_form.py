@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextField, IntegerField, DecimalField, FileField
+from wtforms import StringField, TextField, IntegerField, DecimalField
 from wtforms.validators import DataRequired
 
 class BrewForm(FlaskForm):
@@ -16,4 +16,6 @@ class BrewForm(FlaskForm):
     abv=DecimalField('abv', places=1, rounding=None, validators=[DataRequired()])
     ibu=DecimalField('ibu', places=1, rounding=None)
     srm=IntegerField('srm')
+    grain_bill=TextField('grain_bill', validators=[DataRequired()])
+    hop_list=TextField('hop_list', validators=[DataRequired()])
     instructions=TextField('instructions', validators=[DataRequired()])

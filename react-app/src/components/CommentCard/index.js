@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Modal from 'react-modal'
 import CustomModal from '../CustomModal'
-import EditForm from '../EditForm'
+import EditCommentForm from '../EditCommentForm'
 import { Link } from 'react-router-dom'
 import { useSelector} from 'react-redux'
 import * as commentActions from '../../store/comments'
@@ -25,7 +25,7 @@ export default function CommentCard({comment}){
     return (
         <>
         <CustomModal showModal={showModal}> 
-            <EditForm comment={comment} setShowModal={setShowModal}/>
+            <EditCommentForm comment={comment} setShowModal={setShowModal}/>
         </CustomModal>
         <div className='flex w-2/3 self-center m-8 border-2 border-red rounded-lg' >
             <p>{comment.comment}</p>

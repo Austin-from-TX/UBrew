@@ -14,7 +14,7 @@ class User(db.Model, UserMixin):
   email = db.Column(db.String(255), nullable = False, unique = True)
   hashed_password = db.Column(db.String(255), nullable = False)
 
-  rotation = db.relationship("Rotation", back_populates="user")
+  rotations = db.relationship("Rotation", back_populates="user")
   brews = db.relationship("Brew", back_populates="users")
   photos = db.relationship("Photo", back_populates="user")
   comment = db.relationship("Comment", back_populates="user")

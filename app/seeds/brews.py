@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app.models import db, Brew
  
 def seed_brews():
@@ -15,22 +17,23 @@ def seed_brews():
         "abv" : 5.18,
         "ibu" : 18,
         "srm" : 6,
-        "instructions" : """
-            Grain Bill: 2lbs Vienna Malt
+        "grain_bill": """2lbs Vienna Malt
                           8lbs 2-Row Malt
-                          0.5lbs Crystal Malt
-
-            Hop List: 2oz Cascade Hops @ 60 mins
+                          0.5lbs Crystal Malt""",
+        "hop_list": """2oz Cascade Hops @ 60 mins
                       2oz Cascade Hops @ 30mins
-                      1oz Mosaic Hops @ Flameout
-                      
-           Yeast: Nottingham
+                      1oz Mosaic Hops @ Flameout""",                      
+        "yeast": "Nottingham",
+        "instructions" : """
+            
 
            Steps: Steep your grains in 5.5 gallons water at 152deg for 1.5 hours.  Remove grains and bring to a boil.  
                   As soon as it boils add your first hops addition.  At 30mins add your second hops addition.  
                   Add the last bit of Mosaic hops at flameout after the hour boil.  Reduce temp to ~70deg and add yeast.  
                   Store at 42 deg for 2 weeks before transferring to secondary for another week.  
-                  After that she's ready to bottle and you can enjoy in about 3 days time! """
+                  After that she's ready to bottle and you can enjoy in about 3 days time! """,
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
         {
         "user_id": 1,
@@ -45,17 +48,18 @@ def seed_brews():
         "abv" : 7.24,
         "ibu" : 23,
         "srm" : 16,
-        "instructions" : """
-                Grain Bill: 10lbs 2-Row Malt
+        "grain_bill": """10lbs 2-Row Malt
                             2lbs Maris Otter 
-                            1lbs Honey Malt
-
-                Hop List: 3oz Mosaic Hops @ 60 mins  
-                          3oz Mosaic Hops @ 15min
-
-                Yeast: Pacific Ale Yeast 
+                            1lbs Honey Malt""",
+        "hop_list": """3oz Mosaic Hops @ 60 mins  
+                          3oz Mosaic Hops @ 15min""",
+        "yeast":" Pacific Ale yeast",
+        "instructions" : """
                 
-                Steps: Boil as directed by hops additions.  Dry hop an additional 2oz Mosaic during secondary for that nice juicy taste! """
+                
+                Steps: Boil as directed by hops additions.  Dry hop an additional 2oz Mosaic during secondary for that nice juicy taste! """,
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
         {
         "user_id": 2,
@@ -70,17 +74,15 @@ def seed_brews():
         "abv" : 4.85,
         "ibu" : 12,
         "srm" : 6,
-        "instructions" : """
-                Grain Bill: 6lbs 2-Row Malt 
+        "grain_bill":""" 6lbs 2-Row Malt 
                             4lbs Wheat
-                            0.5lb Carawheat
-
-                Hop List: 2oz Simcoe Hops @ 60 mins  
-                          1oz Nugget Hops @ 15min
-
-                Yeast: German Kolsch
-
-                Steps: Very easy to brew, just boil as directed and let ferment for 2 weeks. No need for secondary, just bottle and serve!"""
+                            0.5lb Carawheat""",
+        "hop_list": """2oz Simcoe Hops @ 60 mins  
+                          1oz Nugget Hops @ 15min""",
+        "yeast": "German Kolsch",
+        "instructions" : """Steps: Very easy to brew, just boil as directed and let ferment for 2 weeks. No need for secondary, just bottle and serve!""",
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
         {
         "user_id": 2,
@@ -95,23 +97,21 @@ def seed_brews():
         "abv" : 4.85,
         "ibu" : 43,
         "srm" : 12,
-        "instructions": """
-            Grain Bill: 5 pounds pale malt 
+        "grain_bill": """5 pounds pale malt 
                         3 pounds vienna malt 
                         2 pounds Munich malt 
                         0.5lbs crystal 
-                        0.5lbs crystal
-
-            Hop List: 1oz Cascade @ 60 minutes  
+                        0.5lbs crystal""",
+        "hop_list": """1oz Cascade @ 60 minutes  
                       .75oz cascade @ 30 minutes 
                       1oz Cascade @ 10 minutes 
                       0.5oz Cascade @ 5 minutes 
                       0.5oz Cascade @ flameout
-                      1oz cascade (dryhop)
-
-            Yeast: American Pale
-
-            Steps: Ferment at low ale temps (62) for two weeks, then dryhop for a week in secondary"""
+                      1oz cascade (dryhop)""",
+        "yeast": "American Pale",
+        "instructions": """Steps: Ferment at low ale temps (62) for two weeks, then dryhop for a week in secondary""",
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
         {
         "user_id": 3,
@@ -126,19 +126,17 @@ def seed_brews():
         "abv" : 4.85,
         "ibu" : 36.1,
         "srm" : 12,
-        "instructions" : """
-            Grain Bill : 6lbs Light Dry Malt Extract 
-                         1lbs Crystal
-
-            Hop List: 2.5oz Cascade @ 15 min  
+         "grain_bill" : """6lbs Light Dry Malt Extract 
+                         1lbs Crystal""",
+        "hop_list": """"2.5oz Cascade @ 15 min  
                       1oz Cascade @ 5 min  
                       0.5oz Cascade at flameout 
-                      1oz Cascade dryhop (secondary)
-
-            Yeast: Nottingham
-
-            Steps: A wonderful tasting hoppy yet sweet caramel flavored pale ale. 
-            And since it uses Malt extract with such a big hop bill you only need to boil for 15 MINUTES!"""
+                      1oz Cascade dryhop (secondary)""",
+        "yeast": "Nottingham",
+        "instructions" : """Steps: A wonderful tasting hoppy yet sweet caramel flavored pale ale. 
+            And since it uses Malt extract with such a big hop bill you only need to boil for 15 MINUTES!""",
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
         {
         "user_id": 3,
@@ -153,24 +151,22 @@ def seed_brews():
         "abv" : 4.5,
         "ibu" : 29,
         "srm" : 6,
-        "instructions" : """
-            Grain Bill : 4 lbs Pilsen Malt 
+        "grain_bill" : """4 lbs Pilsen Malt 
                          3 lbs Vienna Malt 
                          1 lbs Munich Malt
                          1 lbs Corn, Flaked
                          2oz Crystal Malt
-                         0.5oz Carafa Special
-
-            Hop List: 0.5oz Northern Brewer @ 90 mins
+                         0.5oz Carafa Special""",
+        "hop_list":""" 0.5oz Northern Brewer @ 90 mins
                       1.5 oz Crystal @ 60.0 mins 
-                      0.5oz Crystal @ 15.0 min
-
-            Yeast: 1 pkg Mexican Lager (White Labs #WLP940)
-
-            Steps: Dough In: 131 F 15 min
+                      0.5oz Crystal @ 15.0 min""",
+        "yeast": "Mexican Lager (#WLP940)",
+        "instructions" : """Steps: Dough In: 131 F 15 min
                    Ramp to 150 F 60 min
                    Ramp to 160 F 15 min
-                   Mash Out 168 F 10 min"""
+                   Mash Out 168 F 10 min""",
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
         {
         "user_id": 4,
@@ -185,18 +181,15 @@ def seed_brews():
         "abv" : 4.5,
         "ibu" : 35,
         "srm" : 5,
-        "instructions" : """
-            Grain Bill : 6 lb Pilsner
-
-            Hop List: 1.5 oz. Mosaic @ Flameout
-                      1 oz. Mosaic @ dry hop (3 days)
-                      
-
-            Yeast: 1pk Dry Lager Yeast (Safale W-34/70)
-
-            Steps: Brewed BIAB to produce 3.5 gallons, then topped up with bottled distilled water at FO 
+        "grain_bill" : "6 lb Pilsner",
+        "hop_list":""" 1.5 oz. Mosaic @ Flameout
+                      1 oz. Mosaic @ dry hop (3 days)""",
+        "yeast": "1pk Dry Lager yeast (Safale W-34/70)",
+        "instructions" : """Steps: Brewed BIAB to produce 3.5 gallons, then topped up with bottled distilled water at FO 
             to reach my fermenter volume. Added FO hops with the distilled water. Cold crashed beer at 35 degs
-            and then kegged. """
+            and then kegged. """,
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
         {
         "user_id": 4,
@@ -211,21 +204,18 @@ def seed_brews():
         "abv" : 5.1,
         "ibu" : 17,
         "srm" : 29,
-        "instructions" : """
-            Grain Bill: 6 lb Pale Malt (2 Row) 
+        "grain_bill": """6 lb Pale Malt (2 Row) 
                         1 lb Barley, Flaked 
                         1 lb Cara-Pils
                         0.75 lb Roasted Barley 
-                        0.50 lb Chocolate Malt
-
-            Hop List: 1oz Goldings @ 60mins
-                      1oz East Kent @ 60mins
-                      
-
-            Yeast: 1pk Dry Lager Yeast (Safale W-34/70)
-
-            Steps: Boil the all hops for the full hour.  Cool down, then add your yeast.  1 week in primary
-            and another 2 weeks in seconday gets this brew creamy and gorgeous.  The new house favourite! """
+                        0.50 lb Chocolate Malt""",
+        "hop_list": """1oz Goldings @ 60mins
+                      1oz East Kent @ 60mins""",           
+        "yeast": "1pk Dry Lager yeast (Safale W-34/70)",
+        "instructions" : """Steps: Boil the all hops for the full hour.  Cool down, then add your yeast.  1 week in primary
+            and another 2 weeks in seconday gets this brew creamy and gorgeous.  The new house favourite! """,
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
          {
         "user_id": 5,
@@ -240,19 +230,18 @@ def seed_brews():
         "abv" : 7.7,
         "ibu" : 17,
         "srm" : 25,
-        "instructions" : """
-            Grain Bill: 13 lbs American 2-row
+        "grain_bill": """13 lbs American 2-row
                         .5 lbs Carafa III
-                        1 scoop of favorite coffee
-
-            Hop List: 1oz Warrior 
+                        1 scoop of favorite coffee""",
+        "hop_list": """1oz Warrior 
                       1oz Cascade
-                      2oz Cascade 
+                      2oz Cascade """,
 
-            Yeast: 1pk Irish Stout (S-05)
-
-            Steps: Grind Carafa and coffee in a coffee grinder, then steep it in about .5 qts of cold water for a couple hours.
-                   Add dark sludge to the top of the mash just before sparging"""
+            "yeast": "1pk Irish Stout (S-05)",
+        "instructions" : """Steps: Grind Carafa and coffee in a coffee grinder, then steep it in about .5 qts of cold water for a couple hours.
+                   Add dark sludge to the top of the mash just before sparging""",
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
          {
         "user_id": 5,
@@ -267,19 +256,18 @@ def seed_brews():
         "abv" : 4.6,
         "ibu" : 19,
         "srm" : 4,
-        "instructions" : """
-            Grain Bill: 15.5 lb 2-row malt
+        "grain_bill": """15.5 lb 2-row malt
                         4.5 lb Wheat malt
-                        0.5 lb Munich malt
-
-            Hop List: 9 g Yakima Magnum @ 60mins
+                        0.5 lb Munich malt""",
+        "hop_list": """9 g Yakima Magnum @ 60mins
                       8 g Centennial @ 10mins
-                      21 g Centennial @ flameout
+                      21 g Centennial @ flameout""",
                       
 
-            Yeast: Kolsch (Wyeast 2565)
-
-            Steps: Fermented 9 days at 62 °F. Cold crashed for 1 day, then kegged and force carbed. Very drinkable only 11 days after brewday """
+        "yeast": "Kolsch (Wyeast 2565)",
+        "instructions" : """Steps: Fermented 9 days at 62 °F. Cold crashed for 1 day, then kegged and force carbed. Very drinkable only 11 days after brewday """,
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
          {
         "user_id": 6,
@@ -294,17 +282,14 @@ def seed_brews():
         "abv" : 5.4,
         "ibu" : 30,
         "srm" : 3,
-        "instructions" : """
-            Grain Bill: 5lbs Pilsen 
-                        
-            Hop List: 0.5oz Mosaic @ 60mins
+        "grain_bill": "5lbs Pilsen", 
+        "hop_list": """0.5oz Mosaic @ 60mins
                       1oz Mosaic @ flameout
-                      2oz Mosaic @ dry hop (3 days)
-                      
-
-            Yeast: West European Lager (SafLager S-23)
-
-            Steps: Ferment as detailed above, but give an extra 2 weeks to cold crash @ 33deg """
+                      2oz Mosaic @ dry hop (3 days)""",
+        "yeast": "West European Lager (SafLager S-23)",
+        "instructions" : """Steps: Ferment as detailed above, but give an extra 2 weeks to cold crash @ 33deg """,
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
         {
         "user_id": 7,
@@ -319,16 +304,14 @@ def seed_brews():
         "abv" : 8.1,
         "ibu" : 0,
         "srm" : 4,
-        "instructions" : """
-            Grain Bill: 6 Lbs. Wheat DME
-                        2 Lbs. Turbinado Sugar (Primary)
-                        
-            Hop List: 3 Oz. Citra (Dry Hop ~7 Days)
-                      3 Oz. Mosaic (Dry Hop ~7 Days)                      
-
-            Yeast: English Ale Yeast (Safale S-04)
-
-            Steps: Add the dry hop addition at about 30 hours after pitching the yeast. After about a week, transfer immediately to the serving keg."""
+        "grain_bill":""" 6 Lbs. Wheat DME
+                        2 Lbs. Turbinado Sugar (Primary)""",
+         "hop_list": """3 Oz. Citra (Dry Hop ~7 Days)
+                      3 Oz. Mosaic (Dry Hop ~7 Days) """, 
+        "yeast": "English Ale yeast (Safale S-04)",
+        "instructions" : """Steps: Add the dry hop addition at about 30 hours after pitching the yeast. After about a week, transfer immediately to the serving keg.""",
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
         {
         "user_id": 8,
@@ -343,21 +326,18 @@ def seed_brews():
         "abv" : 5.3,
         "ibu" : 30,
         "srm" : 9,
-        "instructions" : """
-            Grain Bill:9 lbs Maris Otter
+         "grain_bill":"""9 lbs Maris Otter
                        1 lbs Vienna Malt
-                       1 lbs Crystal Malt
-                        
-            Hop List: 1 oz Cascade @ 60mins
+                       1 lbs Crystal Malt""",
+        "hop_list": """1 oz Cascade @ 60mins
                       1 oz Cascade @ 10mins
                       1 oz Cascade @ 5mins
-                      1 oz Cascade @ flameout
-                                          
-
-            Yeast: English Ale Yeast (Safale S-04)
-
-            Steps: 2.0 oz Orange zest added during boil, boiled 10.0 min. 1 oz Coriander crushed added during boil, boiled 10 min 
-            2.0 oz Cascade added dry to secondary fermenter"""
+                      1 oz Cascade @ flameout""",
+        "yeast": "English Ale yeast (Safale S-04)",
+        "instructions" : """Steps: 2.0 oz Orange zest added during boil, boiled 10.0 min. 1 oz Coriander crushed added during boil, boiled 10 min 
+            2.0 oz Cascade added dry to secondary fermenter""",
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
         {
         "user_id": 9,
@@ -372,22 +352,19 @@ def seed_brews():
         "abv" : 5.9,
         "ibu" : 57,
         "srm" : 10,
-        "instructions" : """
-            Grain Bill: 11.25 lb Pale Ale Malt
+        "grain_bill": """11.25 lb Pale Ale Malt
                         1.00 lb Cara-Pils/Dextrine
                         0.75 lb Caramunich Malt
-                        0.50 lb Honey Malt
-                        
-            Hop List: 0.75 oz Citra @ 60 mins
+                        0.50 lb Honey Malt""",
+        "hop_list": """0.75 oz Citra @ 60 mins
                       1oz Citra @ 10 mins
                       1oz Citra @ 5 mins
                       1oz Citra @ 1 mins
-                      2oz Simcoe (Dry)
-                                          
-
-            Yeast:  American Ale (Safale S-05)
-
-            Steps: Added 2oz of whole leaf Simcoe into secondary for 14 days, then Kegged."""
+                      2oz Simcoe (Dry)""",
+        "yeast":  "American Ale (Safale S-05)",
+        "instructions" : """Steps: Added 2oz of whole leaf Simcoe into secondary for 14 days, then Kegged.""",
+        'created_at': datetime.now(),
+        'updated_at': datetime.now()
         },
         
     
