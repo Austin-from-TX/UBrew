@@ -6,12 +6,11 @@ import * as brewActions from '../../store/brews'
 
 
 const STYLES = [
-  'Style',
+  'Styles',
   'Pilsner',
   'Lager',
   'Pale Ale',
   'IPA',
-  'Porter',
   'Stout',
   'Wheat'
 ]
@@ -35,13 +34,15 @@ const SearchBrews = () => {
         getBrews()
     }, [dispatch])
 
-    // useEffect(() => {
-    //   setFilter(
-    //     brewList.filter(brew => {
-    //       return brew.style === style
-    //     }, [brewList, style])
-    //   )
-    // })
+    useEffect(() => {
+      if(style !== STYLES[0]){
+      setFilter(
+        brewList.filter(brew => {
+          return brew.style === style
+        }, [brewList, style])
+      )}
+      
+    }, [style])
 
 
   if (!loaded) return <span>Loading</span>;
@@ -69,9 +70,14 @@ const SearchBrews = () => {
         ))
         : */}
 
-        {brewList.map(brew => (
+        {filter ? filter.map(brew=> (
+           <BrewCard brew={brew} />
+        ))
+         :
+        brewList.map(brew => (
           <BrewCard brew={brew} />
-        ))}
+        ))
+        }
         </>
     )
 }

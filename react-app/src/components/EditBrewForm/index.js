@@ -16,7 +16,7 @@ const EditBrewForm = ({setShowBrewModal, brew}) => {
     const [description, setDescription] = useState(brew.description)
     const [original_grav, setOriginalGrav] = useState(brew.original_grav)
     const [final_grav, setFinalGrav] = useState(brew.final_grav)
-    const [ferm_temp, setFermTemp] = useState(brew,ferm_temp)
+    const [ferm_temp, setFermTemp] = useState(brew.ferm_temp)
     const [primary_len, setPrimaryLen] = useState(brew.primary_len)
     const [secondary_len, setSecondaryLen] = useState(brew.secondary_len)
     const [abv, setAbv] = useState(brew.abv)
@@ -24,6 +24,7 @@ const EditBrewForm = ({setShowBrewModal, brew}) => {
     const [srm, setSrm] = useState(brew.srm)
     const [grain_bill, setGrainBill] = useState(brew.grain_bill)
     const [hop_list, setHopList] = useState(brew.hop_list)
+    const [yeast, setYeast] = useState(brew.yeast)
     const [instructions, setInstructions] = useState(brew.instructions)
     const [photo, setPhoto] = useState(brew.photo)
     const [errors, setErrors] = useState([])
@@ -48,6 +49,7 @@ const EditBrewForm = ({setShowBrewModal, brew}) => {
                 srm,
                 grain_bill, 
                 hop_list,
+                yeast,
                 instructions,
                 photo
             })
@@ -146,6 +148,10 @@ const EditBrewForm = ({setShowBrewModal, brew}) => {
             <div>
                 <label>Hop List</label>
                 <textarea type="textarea" placeholder="List Your Hops and Boil Times Here" value={hop_list} onChange={e => setHopList(e.target.value)} required></textarea>
+            </div>
+            <div>
+                <label>Yeast</label>
+                <input type="text" placeholder="Yeast Strain" value={yeast} onChange={e => setYeast(e.target.value)} required></input>
             </div>
             <div>
                 <label>Instructions</label>

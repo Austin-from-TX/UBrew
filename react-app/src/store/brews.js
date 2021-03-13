@@ -89,6 +89,7 @@ export const makeEdit = ( {
     srm,
     grain_bill,
     hop_list,
+    yeast,
     instructions,
     photo
     } ) => async dispatch => {
@@ -113,6 +114,7 @@ export const makeEdit = ( {
                 srm,
                 grain_bill,
                 hop_list,
+                yeast,
                 instructions
                 })
         })
@@ -157,6 +159,7 @@ export const addBrew = (brewSubmit) => async (dispatch) => {
         srm,
         grain_bill,
         hop_list,
+        yeast,
         instructions,
         photo
         } = brewSubmit
@@ -181,6 +184,7 @@ export const addBrew = (brewSubmit) => async (dispatch) => {
             srm,
             grain_bill,
             hop_list,
+            yeast,
             instructions
             })
     })

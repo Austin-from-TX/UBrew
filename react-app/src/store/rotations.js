@@ -62,8 +62,8 @@ export const updateStatus = ({id, user_id, status}) => async dispatch => {
     return data
 }
 
-export const getFeedRotation = (userId) => async dispatch => {
-    const res = await fetch(`/api/rotations/following/${userId}`)
+export const getFeedRotation = (user_id) => async dispatch => {
+    const res = await fetch(`/api/rotations/following/${user_id}`)
     const {followed_rotations} = await res.json()
 
     dispatch(getFeed(followed_rotations))

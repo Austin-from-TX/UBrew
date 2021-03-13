@@ -6,23 +6,31 @@ import {useDispatch, useSelector} from 'react-redux'
 
 const SearchBar = () => {
 
-    // const brewList = useSelector(state => state.brews.brews)
-    // const [keyWord, setSetKeyWord] = useState('')
-    // const [filtered, setFiltered] = useState([])
+    // const searchProjects = async (searchText) => {
+    // const response = await fetch("/api/projects/all");
+    // const allProjects = await response.json();
+    // let stringCheck = searchText.replace(/[[\]']+/g, "");
+    // stringCheck = stringCheck.replaceAll("\\", "");
+    // let projectMatches = allProjects.filter((project) => {
+    //     const regex = new RegExp(`${stringCheck}`, "gi");
+    //     return (
+    //     project.name.match(regex) ||
+    //     project.description.match(regex) ||
+    //     project.user.username.match(regex) ||
+    //     project.user.city.match(regex) ||
+    //     project.user.state.match(regex)
+    //     );
+    // });
+    // if (searchText.length === 0) { 
+    //     projectMatches = [];
+    // }
+    // setMatches(projectMatches);
+    // };
 
-    // const dispatch = useDispatch()
 
     // useEffect(() => {
-    //     dispatch(brewActions.getAllBrews())
-    // }, [dispatch])
-
-    // useEffect(() => {
-    //     setFiltered(
-    //         brewList.filter(brew => {
-    //             return brew.style.toLowerCase().includes(keyWord.toLowerCase()) 
-    //         })
-    //     )
-    // }, [keyWord, brewList])
+    // focusSearchBar();
+    // });
 
     return (
         <>

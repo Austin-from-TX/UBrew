@@ -40,6 +40,12 @@ function User() {
     await dispatch(followActions.newFollow({follower_id: sessionUser.id, followed_id: userId}))
 
   }
+ 
+  const unFollow = async e => {
+    e.preventDefault()
+    await dispatch(followActions.removeFollower({follower_id: sessionUser.id, following_id: userId}))
+
+  }
 
   const followed = userFollows.filter(user => user.id == userId)
   
@@ -80,16 +86,16 @@ function User() {
         <Link to={`/rotations/${user.id}`}>
           <button>View {user.username}'s Rotation </button>
         </Link>
-        {/* {followed ? 
-        <button  onClick={addFollow} className="transition duration-500 ease-in-out text-yellow bg-blue hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-xl text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>UnFollow</button> 
+        {followed.length ?
+        <button  onClick={unFollow} className="transition duration-500 ease-in-out text-yellow bg-blue hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-xl text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>UnFollow</button> 
         :
         <button  onClick={addFollow} className="transition duration-500 ease-in-out text-yellow bg-blue hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-xl text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Follow</button> 
-        } */}
+        }
 
-        {followed.length ?
+        {/* {followed.length ?
           <button> UnFollow </button> :
           <button> Follow </button>
-    }
+    } */}
 
       </div>
       }

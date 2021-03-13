@@ -24,6 +24,7 @@ const BrewForm = () => {
     const [srm, setSrm] = useState('')
     const [grain_bill, setGrainBill] = useState('')
     const [hop_list, setHopList] = useState('')
+    const [yeast, setYeast] = useState('')
     const [instructions, setInstructions] = useState('')
     const [photo, setPhoto] = useState('')
     const [errors, setErrors] = useState([])
@@ -48,6 +49,7 @@ const BrewForm = () => {
                 srm,
                 grain_bill, 
                 hop_list,
+                yeast,
                 instructions,
                 photo
             })
@@ -146,6 +148,10 @@ const BrewForm = () => {
             <div>
                 <label>Hop List</label>
                 <textarea type="textarea" placeholder="List Your Hops and Boil Times Here" value={hop_list} onChange={e => setHopList(e.target.value)} required></textarea>
+            </div>
+            <div>
+                <label>Yeast</label>
+                <input type="text" placeholder="Yeast Strain" value={yeast} onChange={e => setYeast(e.target.value)} required></input>
             </div>
             <div>
                 <label>Instructions</label>

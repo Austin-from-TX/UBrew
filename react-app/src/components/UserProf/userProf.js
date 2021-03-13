@@ -18,10 +18,12 @@ const UserProf = () => {
     const followed = useSelector(state => state.follows.userFollows)
     const followers = useSelector(state => state.follows.userFollowers)
     const feed = useSelector(state => state.rotation.feed)
+
+    const user_id = user.id
     
     const getState = async () => {
-      await dispatch(followActions.getFollowerList({user_id: user.id}))
-      await dispatch(rotationActions.getFeedRotation(user.id))
+      await dispatch(followActions.getFollowerList(user_id))
+      await dispatch(rotationActions.getFeedRotation(user_id))
       
       setLoaded(true)
     }
