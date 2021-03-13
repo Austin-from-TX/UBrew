@@ -4,6 +4,7 @@ const NEW_ROTATION = 'rotations/NEW_ROTATION'
 const USER_ROTATIONS = 'rotations/USER_ROTATIONS'
 const UPDATE_ROTATION = 'rotations/UPDATE_ROTATION'
 const DELETE_ROTATION = 'rotations/DELETE_ROTATION'
+const GET_FEED = 'rotations/GET_FEED'
 
 const newRotation = rotation => {
     return {type: NEW_ROTATION, rotation}
@@ -20,6 +21,10 @@ const updateRotation = rotation => {
 
 const deleteRotation = rotation => {
     return {type: DELETE_ROTATION, rotation}
+}
+
+const getFeed = rotations => {
+    return {type: GET_FEED, rotations}
 }
 
 export const addRotation = ({user_id, brew_id, status}) => async dispatch => {
@@ -57,6 +62,13 @@ export const updateStatus = ({id, user_id, status}) => async dispatch => {
     return data
 }
 
+export const getFeedRotation = (user_id) => async dispatch => {
+    const res = await fetch(`/api/rotations/following/${user_id}`)
+    const {followed_rotations} = await res.json()
+
+    dispatch(getFeed(followed_rotations))
+}
+
 export const removeRotation = ({user_id, rotation_id}) => async dispatch => {
     const res = await fetch(`/api/rotations/${rotation_id}/delete`, {
       method: "DELETE",
@@ -70,7 +82,7 @@ export const removeRotation = ({user_id, rotation_id}) => async dispatch => {
   dispatch(deleteRotation(data));
 };
 
-const initialState = { userRotations: {}, rotations: [] }
+const initialState = { feed: [], userRotations: {}, rotations: [] }
 
 const rotationsReducer = (state = initialState, action) => {
     // let newState  = {...state};
@@ -84,6 +96,9 @@ const rotationsReducer = (state = initialState, action) => {
             return updateState;
         case UPDATE_ROTATION:
             updateState.rotations = [...action.rotation]
+            return updateState;
+        case GET_FEED:
+            updateState.feed = [...action.rotations]
             return updateState;
         case DELETE_ROTATION:
             updateState.rotations = [...action.rotation]

@@ -4,12 +4,12 @@ import { useParams } from 'react-router-dom'
 import RotationCard from '../RotationCard'
 import * as rotationActions from "../../store/rotations";
 
-export default function RotationList({user}){
+export default function RotationList(){
 
     const [loaded, setLoaded] = useState(false);
     
-    const userId = user.id
    
+    const {userId} = useParams()
   
     const dispatch = useDispatch()
     const rotationList = useSelector(state => state.rotation.rotations)
@@ -36,7 +36,7 @@ export default function RotationList({user}){
                 rotation_status={rotation.status} 
                 rotation_id={rotation.id} 
                 brew_name={rotation.brew.brew_name} 
-                user_id={rotation.user_id}
+                user_id={userId}
                 creator={rotation.brew.users}
                 brew_id={rotation.brew_id}
                 creator_id={rotation.brew.user_id}

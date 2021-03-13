@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import * as followActions from '../../../store/follows'
+import { Link } from 'react-router-dom'
 
 export default function FollowCard({follow}){
 
@@ -13,12 +14,16 @@ export default function FollowCard({follow}){
 
     return(
         <>
-        <div className='flex border rounded-lg m-4 p-4 justify-between'>
+        <div className='flex  border md:flex-shrink-0 rounded-lg m-4 p-4 justify-between'>
+           <Link to={`/users/${follow.id}`}>
             <div className='flex space-x-2'>
                 <p>{follow.username}</p>
                 <p>({follow.first_name} {follow.last_name})</p>
             </div>
+            </Link>
+           <div>
             <button onClick={unfollow} className=''>UnFollow</button>
+            </div>
         </div>  
         </>
     )

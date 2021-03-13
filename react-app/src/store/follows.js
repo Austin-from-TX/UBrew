@@ -1,6 +1,5 @@
 const NEW_FOLLOWER = 'follows/NEW_FOLLOWER'
 const DELETE_FOLLOWER = 'follows/DELETE_FOLLOWER'
-const IS_FOLLOWED = 'follows/IS_FOLLOWED'
 const FOLLOWED_LIST = 'follows/FOLLOWED_LIST'
 const FOLLOWING_LIST = 'follows/FOLLOWING_LIST'
 
@@ -11,10 +10,6 @@ const deleteFollow = user => {
     return { type: DELETE_FOLLOWER, user}
 }
 
-const isFollowed = user => {
-    console.log('isFollowed', user)
-    return { type: IS_FOLLOWED, user}
-}
 
 const followerList = (followers) => {
     return { 
@@ -57,14 +52,8 @@ export const newFollow = ({follower_id, followed_id}) => async dispatch => {
     return data 
 }
 
-export const findFollower = ({user_id}) => async dispatch => {
-    const res = await fetch(`/api/follows/${user_id}`)
-    const data = await res.json()
-    dispatch(isFollowed(data))
-    return data 
-}
 
-export const getFollowerList = ({user_id}) => async dispatch => {
+export const getFollowerList = (user_id) => async dispatch => {
     console.log('from the thunk', user_id)
     const res = await fetch(`/api/follows/${user_id}/get`)
     const data = await res.json()
@@ -74,7 +63,7 @@ export const getFollowerList = ({user_id}) => async dispatch => {
 }
 
 
-const initialState = {user: {}, userFollows: {}, userFollowers: {}}
+const initialState = {userFollows: [], userFollowers: []}
 
 
 const followReducer = (state = initialState, action) => {
@@ -92,9 +81,6 @@ const followReducer = (state = initialState, action) => {
             return updateState
         case DELETE_FOLLOWER:
             updateState.userFollows = action.user
-            return updateState
-        case IS_FOLLOWED: 
-            updateState.userFollows =action.user
             return updateState
         default: 
             return state

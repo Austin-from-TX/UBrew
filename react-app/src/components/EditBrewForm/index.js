@@ -4,29 +4,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import * as brewActions from '../../store/brews'
 
 
-const BrewForm = () => {
+const EditBrewForm = ({setShowBrewModal, brew}) => {
 
    
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
     const newBrew = useSelector(state => state.brew.brew)
 
-    const [style, setStyle] = useState('')
-    const [brewName, setBrewName] = useState('')
-    const [description, setDescription] = useState('')
-    const [original_grav, setOriginalGrav] = useState('')
-    const [final_grav, setFinalGrav] = useState('')
-    const [ferm_temp, setFermTemp] = useState('')
-    const [primary_len, setPrimaryLen] = useState('')
-    const [secondary_len, setSecondaryLen] = useState('')
-    const [abv, setAbv] = useState('')
-    const [ibu, setIbu] = useState('')
-    const [srm, setSrm] = useState('')
-    const [grain_bill, setGrainBill] = useState('')
-    const [hop_list, setHopList] = useState('')
-    const [yeast, setYeast] = useState('')
-    const [instructions, setInstructions] = useState('')
-    const [photo, setPhoto] = useState('')
+    const [style, setStyle] = useState(brew.style)
+    const [brewName, setBrewName] = useState(brew.brewName)
+    const [description, setDescription] = useState(brew.description)
+    const [original_grav, setOriginalGrav] = useState(brew.original_grav)
+    const [final_grav, setFinalGrav] = useState(brew.final_grav)
+    const [ferm_temp, setFermTemp] = useState(brew.ferm_temp)
+    const [primary_len, setPrimaryLen] = useState(brew.primary_len)
+    const [secondary_len, setSecondaryLen] = useState(brew.secondary_len)
+    const [abv, setAbv] = useState(brew.abv)
+    const [ibu, setIbu] = useState(brew.ibu)
+    const [srm, setSrm] = useState(brew.srm)
+    const [grain_bill, setGrainBill] = useState(brew.grain_bill)
+    const [hop_list, setHopList] = useState(brew.hop_list)
+    const [yeast, setYeast] = useState(brew.yeast)
+    const [instructions, setInstructions] = useState(brew.instructions)
+    const [photo, setPhoto] = useState(brew.photo)
     const [errors, setErrors] = useState([])
 
 
@@ -34,8 +34,8 @@ const BrewForm = () => {
         e.preventDefault()
         let errors = []
         const res = await dispatch(
-            brewActions.addBrew({
-                user_id: sessionUser.id,
+            brewActions.makeEdit({
+                brew_id: brew.id,
                 style,
                 brew_name: brewName,
                 description,
@@ -158,12 +158,15 @@ const BrewForm = () => {
                 <textarea type="textarea" placeholder="Please share with us your expertise on how to brew this just right!" value={instructions} onChange={e => setInstructions(e.target.value)} required></textarea>
             </div>
             <div>
-                <label className=" my-8 text-yellow bg-blue hover:bg-brown px-6 py-4 rounded-md text-xl" style={{fontFamily: 'Bourbon Grotesque'}}>Add A Photo
+                <label className=" my-8 text-yellow bg-blue hover:bg-brown px-6 py-4 rounded-md text-xl" style={{fontFamily: 'Bourbon Grotesque'}}>Change Photo
                 <input style={{display: 'none'}} type="file" onChange={e => setPhoto(e.target.files[0])} />
                 </label>
             </div>
             <div>
-                <button className="my-8 text-yellow bg-blue hover:bg-brown px-6 py-4 rounded-md text-xl" style={{fontFamily: 'Bourbon Grotesque'}} type="submit">Share Your Brew!</button>
+                <button onClick={e=> setShowBrewModal(false)} className="my-8 text-yellow bg-blue hover:bg-brown px-6 py-4 rounded-md text-xl" style={{fontFamily: 'Bourbon Grotesque'}} >Cancel</button>
+            </div>
+            <div>
+                <button className="my-8 text-yellow bg-blue hover:bg-brown px-6 py-4 rounded-md text-xl" style={{fontFamily: 'Bourbon Grotesque'}} type="submit">Confirm Changes</button>
             </div>
             </form>
         </div>
@@ -171,4 +174,4 @@ const BrewForm = () => {
     )
 }
 
-export default BrewForm
+export default EditBrewForm

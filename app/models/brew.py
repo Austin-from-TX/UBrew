@@ -19,7 +19,12 @@ class Brew(db.Model):
     abv = db.Column(db.Float, nullable=False)
     ibu = db.Column(db.Float)
     srm = db.Column(db.Integer)
+    grain_bill = db.Column(db.Text, nullable=False)
+    hop_list = db.Column(db.Text, nullable=False)
+    yeast = db.Column(db.String(100), nullable=False)
     instructions = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+    updated_at = db.Column(db.DateTime, nullable=False)
     
 
     users = db.relationship("User", back_populates="brews")

@@ -29,11 +29,13 @@ export default function BrewList(){
 
     return (
        <>
+       <div>
         {brewList && brewList.map(brew => (
-            <li>
+          
               <BrewCard brew={brew} />
-            </li>
+            
           ))}
+        </div>
         </>
     )
 }
