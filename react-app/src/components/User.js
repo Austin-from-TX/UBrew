@@ -43,7 +43,7 @@ function User() {
  
   const unFollow = async e => {
     e.preventDefault()
-    await dispatch(followActions.removeFollower({follower_id: sessionUser.id, following_id: userId}))
+    await dispatch(followActions.removeFollower({follower_id: sessionUser.id, followed_id: userId}))
 
   }
 
