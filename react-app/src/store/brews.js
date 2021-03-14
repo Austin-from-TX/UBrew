@@ -1,4 +1,4 @@
-const NEW_BREW = "brews/add/NEW_BREW";
+const NEW_BREW = "brews/NEW_BREW";
 const GET_ONE_BREW = 'brews/GET_ONE_BREW'
 const GET_USER_BREWS = 'brews/GET_USER_BREWS'
 const GET_ALL_BREWS = 'brews/GET_ALL_BREWS'
@@ -93,9 +93,8 @@ export const makeEdit = ( {
     instructions,
     photo
     } ) => async dispatch => {
-   
 
-        const res = await fetch(`/api/brews/${brew_id}/edit`, {
+            const res = await fetch(`/api/brews/${brew_id}/edit`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -120,22 +119,22 @@ export const makeEdit = ( {
         })
     let result = await res.json()
 
-    if (photo){
-    const form = new FormData()
-    form.append('photo', photo)
-    form.append('user_id', result.user_id)
-    form.append('brew_id', result.id)
-    
-    const photoRes = await fetch('/api/photos/', {
-        method: "PUT",
-        body: form
-    })
+    if (!photo){
+        dispatch(editBrew(result))
+    } else {
+        const form = new FormData()
+        form.append('photo', photo)
+        
+        const photoRes = await fetch(`/api/photos/${brew_id}`, {
+            method: "PUT",
+            body: form
+        })
 
     let p_result = await photoRes.json()
     console.log(p_result.brew_id)
     if (res.ok && photoRes.ok){
-            // result['photos'].push(p_result.url)
-            dispatch(newBrew(result))
+            result.photos[0]['url']=p_result.url
+            dispatch(editBrew(result))
         }
     return p_result.brew_id
     }
@@ -205,8 +204,9 @@ export const addBrew = (brewSubmit) => async (dispatch) => {
     console.log(p_result.brew_id)
     if (res.ok && photoRes.ok){
             // result['photos'].push(p_result.url)
-            dispatch(editBrew(result))
+            dispatch(newBrew(result))
         }
+    console.log('line before return, brew_id', p_result.brew_id)
     return p_result.brew_id
     }
 
@@ -219,7 +219,7 @@ const initialState = {newBrew: null, currentBrew: {}, allBrews: {}, userBrews: {
         switch (action.type) {
             case NEW_BREW:
                 newState = Object.assign({}, state)
-                newState.newBrew = action.payload
+                updateState.newBrew = action.payload
                 return newState
             case GET_ONE_BREW:
                 newState = Object.assign({}, state)

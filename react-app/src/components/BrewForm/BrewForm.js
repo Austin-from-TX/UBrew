@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import * as brewActions from '../../store/brews'
 
@@ -8,8 +8,9 @@ const BrewForm = () => {
 
    
     const dispatch = useDispatch()
+    const history = useHistory()
     const sessionUser = useSelector(state => state.session.user)
-    const newBrew = useSelector(state => state.brew.brew)
+    const newBrew = useSelector(state => state.brew.newBrew)
 
     const [style, setStyle] = useState('')
     const [brewName, setBrewName] = useState('')
@@ -54,6 +55,7 @@ const BrewForm = () => {
                 photo
             })
         )
+        history.push(`/brews/${res}`)
         }
 
     return (
@@ -104,7 +106,7 @@ const BrewForm = () => {
             </div>
             <div>
                 <label>Secondary Fermentation</label>
-                <input type="text" placeholder="Zip Code" value={secondary_len} onChange={e => setSecondaryLen(e.target.value)} />
+                <input type="text" placeholder="Secondary" value={secondary_len} onChange={e => setSecondaryLen(e.target.value)} />
             </div>
             <div>
                 <label>ABV%</label>

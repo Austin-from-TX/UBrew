@@ -22,7 +22,7 @@ const UserProf = () => {
     const user_id = user.id
     
     const getState = async () => {
-      await dispatch(followActions.getFollowerList(user_id))
+      await dispatch(followActions.getFollowerList({user_id}))
       await dispatch(rotationActions.getFeedRotation(user_id))
       
       setLoaded(true)

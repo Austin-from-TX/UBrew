@@ -50,7 +50,12 @@ class Brew(db.Model):
             'abv': self.abv,
             'ibu': self.ibu,
             'srm': self.srm,
+            'grain_bill': self.grain_bill, 
+            'hop_list': self.hop_list,
+            'yeast': self.yeast,
             'instructions': self.instructions,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at,
             "photos": [photo.to_dict() for photo in self.photos],
             "users": self.users.username,
            
