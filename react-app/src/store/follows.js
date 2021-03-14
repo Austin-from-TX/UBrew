@@ -25,8 +25,8 @@ const followingList = (following) => {
 }
 
 export const removeFollower = ({follower_id, followed_id}) => async dispatch => {
-    console.log('followerid from the thunk', followed_id)
-    const res = await fetch(`api/follows/${followed_id}/delete`, {
+    console.log('followedid from the thunk', followed_id)
+    const res = await fetch(`/api/follows/${followed_id}/delete`, {
         method: 'DELETE', 
         headers: {
             "Content-Type": 'application/json'
