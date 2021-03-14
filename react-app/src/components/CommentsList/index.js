@@ -29,11 +29,13 @@ export default function CommentList({brew}){
     
       return (
         <div >
-        {commentList && commentList.map(comment => (
+        {commentList.length ? commentList.map(comment => (
           
           <CommentCard comment={comment} />
           
-          ))}
+          ))
+        :
+        <p className='m-7'>Be the first to comment on this brew!</p>}
         
         </div>
       )

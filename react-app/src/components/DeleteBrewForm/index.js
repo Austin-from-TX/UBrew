@@ -17,8 +17,8 @@ export default function DeleteBrewForm({setShowDeleteModal, brew}){
         <>
         <div>
         <p>Do you really want to make the world a darker place by deleting this awesome brew?</p>
-        <button onClick={setShowDeleteModal(false)}>Cancel</button>
-        <button onClick={deleteRecipe}>Cancel</button>
+        <button onClick={e => setShowDeleteModal(false)}>Cancel</button>
+        <button onClick={deleteRecipe}>Delete</button>
         </div>
         </>
     )

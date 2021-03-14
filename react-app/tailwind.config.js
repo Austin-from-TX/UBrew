@@ -18,6 +18,7 @@ module.exports = {
       },
       amber: {
         
+        light: '#E7B66C',
         DEFAULT: '#d38c22',
         
       },
@@ -32,6 +33,12 @@ module.exports = {
         light: '#530B0E',
         DEFAULT: '#360709',
         
+      }, 
+
+      gray: {
+        light: '#F3F3F3',
+        DEFAULT: '#E7E7E7',
+        dark: '#DDDDDD',
       }
     },
     extend: {},

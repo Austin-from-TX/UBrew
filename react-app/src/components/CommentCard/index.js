@@ -27,20 +27,24 @@ export default function CommentCard({comment}){
         <CustomModal showModal={showModal}> 
             <EditCommentForm comment={comment} setShowModal={setShowModal}/>
         </CustomModal>
-        <div className='flex w-2/3 self-center m-8 border-2 border-red rounded-lg' >
-            <p>{comment.comment}</p>
-            <p>{comment.username}</p>
-            <p>{comment.created_at}</p>            
+        <div className='flex-col w-full self-center m-4 border-2 border-red p-4 pb-1 rounded-lg box-border bg-gray shadow-xl' >
+            <div className='space-y-4'>
+                <p className='text-lg font-medium text-brown-light'>{comment.comment}</p>
+                <p className='text-sm text-brown-light'>User: {<Link to={`/users/${comment.user_id}`}>{comment.username}</Link>}</p>
+                <p className='text-xs text-brown-light'>{comment.created_at}</p>  
+            </div>
+            <div>        
             {sessionUser.id === comment.user_id && 
-            <div>
-                <div className='flex-col flex-1 p-2 m-4 space-y-6 self-center text-center'>
-                    <button onClick={()=> setShowModal(true)} className=" m-4 transition duration-500 ease-in-out bg-blue text-yellow hover:bg-brown hover:text-yellow-dark px-4 py-3 rounded-md text-sm"   style={{fontFamily: 'Bourbon Grotesque'}} >Edit Comment</button>
+            <div className='flex'>
+                <div>
+                    <button onClick={()=> setShowModal(true)} className=" m-4 transition duration-500 ease-in-out bg-blue text-yellow hover:bg-brown hover:text-yellow-dark px-2 py-1 rounded-md text-xs"   style={{fontFamily: 'Bourbon Grotesque'}} >Edit Comment</button>
                 </div>
-                <div className="m-8 self-center">
-                    <button onClick={onDelete} className="m-4 transition duration-500 ease-in-out bg-red text-yellow hover:bg-red-light hover:text-yellow-dark px-4 py-3 rounded-md text-sm"  style={{fontFamily: 'Bourbon Grotesque'}}>Remove</button>
+                <div>
+                    <button onClick={onDelete} className="m-4 transition duration-500 ease-in-out bg-red text-yellow hover:bg-red-light hover:text-yellow-dark px-2 py-1 rounded-md text-xs"  style={{fontFamily: 'Bourbon Grotesque'}}>Remove</button>
                 </div>
             </div>
             }
+            </div>  
             
         </div>
         </>

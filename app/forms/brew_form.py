@@ -18,4 +18,5 @@ class BrewForm(FlaskForm):
     srm=IntegerField('srm')
     grain_bill=TextField('grain_bill', validators=[DataRequired()])
     hop_list=TextField('hop_list', validators=[DataRequired()])
+    yeast=StringField('yeast', validators=[DataRequired()])
     instructions=TextField('instructions', validators=[DataRequired()])

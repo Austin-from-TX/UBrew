@@ -24,14 +24,14 @@ const followingList = (following) => {
     }
 }
 
-export const removeFollower = ({follower_id, following_id}) => async dispatch => {
-    console.log('followerid from the thunk', following_id)
-    const res = await fetch(`api/follows/${follower_id}/delete`, {
+export const removeFollower = ({follower_id, followed_id}) => async dispatch => {
+    console.log('followerid from the thunk', followed_id)
+    const res = await fetch(`api/follows/${followed_id}/delete`, {
         method: 'DELETE', 
         headers: {
             "Content-Type": 'application/json'
         }, 
-        body: JSON.stringify({following_id})
+        body: JSON.stringify({follower_id})
     })
     const data = await res.json()
     console.log(data)
@@ -53,7 +53,7 @@ export const newFollow = ({follower_id, followed_id}) => async dispatch => {
 }
 
 
-export const getFollowerList = (user_id) => async dispatch => {
+export const getFollowerList = ({user_id}) => async dispatch => {
     console.log('from the thunk', user_id)
     const res = await fetch(`/api/follows/${user_id}/get`)
     const data = await res.json()

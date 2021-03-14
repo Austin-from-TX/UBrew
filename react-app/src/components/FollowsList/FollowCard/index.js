@@ -8,8 +8,8 @@ export default function FollowCard({follow}){
     const sessionUser = useSelector(state => state.session.user)
 
     const unfollow = (follower_id, following_id) => {
-        console.log('unfollow from button', sessionUser.id)
-        dispatch(followActions.removeFollower({follower_id: follow.id, following_id: sessionUser.id}))
+        console.log('unfollow from button', follow.id)
+        dispatch(followActions.removeFollower({follower_id: sessionUser.id, followed_id: follow.id}))
     }
 
     return(

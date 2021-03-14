@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import SearchBar from '../SearchBar/SearchBar'
 import BrewCard from '../BrewCard/BrewCard'
 import * as brewActions from '../../store/brews'
 
@@ -50,20 +49,23 @@ const SearchBrews = () => {
 
     return (
         <>
-         <SearchBar />
-         <select
-          value={style}
-          onChange={e => setStyle(e.target.value)}
-        >
-          {STYLES.map(style => (
-            <option
-              key={style}
-            >
-              {style}
-            </option>
-          ))}
-        </select>
-
+         <div className='flex mx-auto'>
+          <div className="border-4 border-red rounded-xl flex m-4 max-w-6xl ">
+                  <input className='focus:outline-none rounded-md' type="text" placeholder="Find Your Next Brew"></input>          
+            </div>  
+          <select
+            value={style}
+            onChange={e => setStyle(e.target.value)}
+          >
+            {STYLES.map(style => (
+              <option
+                key={style}
+              >
+                {style}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {/* {style !== 'Style' ? filter.map(brew => (
           <div>{brew.brew_name}</div>

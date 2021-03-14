@@ -34,3 +34,25 @@ def add_photo():
         return photo.to_dict()
     else:
         return redirect("/brews/add/new")
+
+
+@photo_routes.route('/<int:id>', methods=["PUT"])
+@login_required
+def edit_photo(id):
+
+    if "photo" not in request.files:
+        return "No user_file key in request.files"
+
+    file = request.files["photo"]
+
+    if file:
+        photo_url = upload_file_to_s3(file, Config.S3_BUCKET)
+
+        photo = Photo.query.filter(Photo.brew_id == id).first()
+        photo.url=photo_url
+
+        
+        db.session.add(photo)
+        db.session.commit()
+
+        return photo.to_dict()

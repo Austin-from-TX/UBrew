@@ -12,7 +12,7 @@ const EditBrewForm = ({setShowBrewModal, brew}) => {
     const newBrew = useSelector(state => state.brew.brew)
 
     const [style, setStyle] = useState(brew.style)
-    const [brewName, setBrewName] = useState(brew.brewName)
+    const [brewName, setBrewName] = useState(brew.brew_name)
     const [description, setDescription] = useState(brew.description)
     const [original_grav, setOriginalGrav] = useState(brew.original_grav)
     const [final_grav, setFinalGrav] = useState(brew.final_grav)
@@ -26,12 +26,13 @@ const EditBrewForm = ({setShowBrewModal, brew}) => {
     const [hop_list, setHopList] = useState(brew.hop_list)
     const [yeast, setYeast] = useState(brew.yeast)
     const [instructions, setInstructions] = useState(brew.instructions)
-    const [photo, setPhoto] = useState(brew.photo)
+    const [photo, setPhoto] = useState('')
     const [errors, setErrors] = useState([])
 
 
     const handleSubmit = async e => {
         e.preventDefault()
+        setShowBrewModal(false)
         let errors = []
         const res = await dispatch(
             brewActions.makeEdit({
@@ -53,12 +54,12 @@ const EditBrewForm = ({setShowBrewModal, brew}) => {
                 instructions,
                 photo
             })
-        )
+        ); 
         }
 
     return (
         <>
-        {newBrew && <Redirect to={`/brews/${newBrew.id}`} />}
+        
          <div className="new-brew-form">
           <h1>Add A Brew Recipe</h1>
             {errors.length > 0 && errors.map(error => <div className="errors" key={error}>{error}</div>)}
@@ -158,15 +159,15 @@ const EditBrewForm = ({setShowBrewModal, brew}) => {
                 <textarea type="textarea" placeholder="Please share with us your expertise on how to brew this just right!" value={instructions} onChange={e => setInstructions(e.target.value)} required></textarea>
             </div>
             <div>
-                <label className=" my-8 text-yellow bg-blue hover:bg-brown px-6 py-4 rounded-md text-xl" style={{fontFamily: 'Bourbon Grotesque'}}>Change Photo
+                <label className=" my-8 text-yellow bg-blue hover:bg-brown px-2 py-1 rounded-md text-xs" style={{fontFamily: 'Bourbon Grotesque'}}>Change Photo
                 <input style={{display: 'none'}} type="file" onChange={e => setPhoto(e.target.files[0])} />
                 </label>
             </div>
             <div>
-                <button onClick={e=> setShowBrewModal(false)} className="my-8 text-yellow bg-blue hover:bg-brown px-6 py-4 rounded-md text-xl" style={{fontFamily: 'Bourbon Grotesque'}} >Cancel</button>
+                <button onClick={e=> setShowBrewModal(false)} className="my-8 text-yellow bg-blue hover:bg-brown px-2 py-1 rounded-md text-xs" style={{fontFamily: 'Bourbon Grotesque'}} >Cancel</button>
             </div>
             <div>
-                <button className="my-8 text-yellow bg-blue hover:bg-brown px-6 py-4 rounded-md text-xl" style={{fontFamily: 'Bourbon Grotesque'}} type="submit">Confirm Changes</button>
+                <button className="-my-8 text-yellow bg-blue hover:bg-brown px-2 py-1 rounded-md text-xs" style={{fontFamily: 'Bourbon Grotesque'}} type="submit">Confirm Changes</button>
             </div>
             </form>
         </div>
