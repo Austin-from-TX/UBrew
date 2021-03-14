@@ -89,6 +89,9 @@ def edit_brew(id):
 @login_required
 def delete_brew(id):
     brew = Brew.query.get(id)
+    photo = Photo.query.filter(Photo.brew_id == id).first()
+    print('111111111111111111111', photo.to_dict())
+    db.session.delete(photo)
     db.session.delete(brew)
     db.session.commit()
 

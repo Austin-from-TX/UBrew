@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom'
 import Modal from 'react-modal'
 import SignUpForm from '../auth/SignUpForm'
 import LoginForm from '../auth/LoginForm'
-import suds from './beer-suds.jpg'
+import CustomModal from '../CustomModal'
 
 const customStyles = {
     content : {
@@ -18,7 +18,7 @@ const customStyles = {
       border: "none",
       width: "40%",
       boxSizing: "border-box",
-
+      background: "none",
     },
     overlay : {
         // backgroundColor: "transparent",

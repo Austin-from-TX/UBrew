@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { login } from "../../services/auth";
+import { setUser } from "../../store/session"
 
 const LoginForm = ({ authenticated, setAuthenticated }) => {
   const [errors, setErrors] = useState([]);

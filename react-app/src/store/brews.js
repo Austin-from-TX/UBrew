@@ -33,6 +33,7 @@ const editBrew = brew => {
 }
 
 const deleteBrew = brew => {
+    console.log('brew from the action', brew )
     return { type: DELETE_BREW, brew}
 }
 
@@ -68,10 +69,8 @@ export const removeBrew = ({id}) => async dispatch => {
         },
         body: JSON.stringify({id})
     })
-    const data = await res.json()
-
-    dispatch(deleteBrew(data))
-    return data
+    dispatch(deleteBrew(id))
+    return res
 }
 
 export const makeEdit = ( {
@@ -236,8 +235,8 @@ const initialState = {newBrew: null, currentBrew: {}, allBrews: {}, userBrews: {
                 })
                 return updateState
             case DELETE_BREW:
-                delete updateState.userBrews[action.brew];
-                return updateState
+                delete updateState.userBrews[action.id];
+                return updateState;
             case EDIT_BREW:
                 updateState.currentBrew = action.brew
                 return updateState

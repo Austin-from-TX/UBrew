@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
 from app.models import db, User, Brew, Rotation
 from app.forms import RotationForm
-from sqlalchemy import asc
+from sqlalchemy import desc
 from datetime import datetime
 import json
 
@@ -14,14 +14,10 @@ rotation_routes = Blueprint('rotations', __name__)
 def follow_rotation(id):
     user = User.query.get(id)
 
-    # following = [follow.id for follow in user.followers]
-    # print('---------following-------', following)
-
-    # feed = []
-
-    # for follow in following:
+    following = [follow.id for follow in user.followers]
+   
     
-    #     posts = Rotation.query.filter(Rotation.user_id == follow.user_id).order_by(asc(Rotation.status)).all()
+    rotations = Rotation.query.filter(Rotation.user_id.in_(following)).order_by(desc(Rotation.updated_at)).all()
     #     feed.append(posts)
     # console.log()
    
