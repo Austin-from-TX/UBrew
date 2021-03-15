@@ -3,7 +3,7 @@ import {NavLink} from 'react-router-dom'
 import Modal from 'react-modal'
 import SignUpForm from '../auth/SignUpForm'
 import LoginForm from '../auth/LoginForm'
-import CustomModal from '../CustomModal'
+
 
 const customStyles = {
     content : {
@@ -52,9 +52,9 @@ export default function LoginModal({setAuthenticated, setDisplay}){
     return (
         <>
         <div className="ml-3 relative flex">
-            <button onClick={showLoginModal} className="text-yellow hover:bg-brown hover:text-amber px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Login</button>
+            <button onClick={showLoginModal} className="transition duration-500 ease-in-out text-yellow hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Login</button>
         
-            <button onClick={showSignUpModal} className="text-yellow hover:bg-brown hover:text-amber px-6 py-4 rounded-md text-xl"  style={{fontFamily: 'Bourbon Grotesque'}}>Signup</button>
+            <button onClick={showSignUpModal} className="transition duration-500 ease-in-out text-yellow hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-md text-xl"  style={{fontFamily: 'Bourbon Grotesque'}}>Signup</button>
         </div>
         <Modal style={customStyles} isOpen={showModal} ariaHideApp={false}>
         {

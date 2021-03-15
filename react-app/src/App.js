@@ -49,7 +49,7 @@ function App() {
       <Switch>
         <Route exact path="/" >
         {!authenticated ? 
-            <Home display={display} />
+            <Home authenticated={authenticated} setAuthenticated={setAuthenticated} display={display} />
             :
            <UserProf display={display} />
         }

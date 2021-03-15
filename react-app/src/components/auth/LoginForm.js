@@ -1,18 +1,38 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../services/auth";
 import { setUser } from "../../store/session"
 
-const LoginForm = ({ authenticated, setAuthenticated }) => {
-  const [errors, setErrors] = useState([]);
+
+const LoginForm = ({ authenticated, setAuthenticated, setShowLoginModal, setShowSignUpModal }) => {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([])
+  const dispatch = useDispatch();
+  const history = useHistory()
 
+
+
+  const demoLogin = async (e) => {
+    e.preventDefault();
+    const demoUser = await login('bru@bru.com', 'password');
+    if (!demoUser.errors) {
+      dispatch(setUser(demoUser))
+      setAuthenticated(true);
+      history.push("/");
+    } else {
+      setErrors(demoUser.errors);
+    }
+  }
+  
   const onLogin = async (e) => {
     e.preventDefault();
     const user = await login(email, password);
     if (!user.errors) {
+
+      dispatch(setUser(user));
       setAuthenticated(true);
     } else {
       setErrors(user.errors);
@@ -27,6 +47,15 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     setPassword(e.target.value);
   };
 
+  const onClick = (e) => {
+    setShowLoginModal(false)
+  }
+
+  const showSignUp = (e) => {
+    setShowLoginModal(false)
+    setShowSignUpModal(true)
+  }
+
   if (authenticated) {
     return <Redirect to="/" />;
   }
@@ -35,15 +64,14 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
     <>
    
     
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label style={{fontFamily: 'Bourbon Grotesque', fontSize: 'large'}} htmlFor="email">Email</label>
+    <form className='flex-col space-y-4' onSubmit={onLogin}>
+      <button className="btn__x" onClick={onClick}>
+          <i className="fas fa-times"></i>
+      </button>
+      <div className='flex justify-around'>
+        <label className='self-center text-brown-light' style={{fontFamily: 'Bourbon Grotesque', fontSize: 'large'}} htmlFor="email">Email</label>
         <input
+          className='flex-none rounded-lg border-2 border-red'
           name="email"
           type="text"
           placeholder="Email"
@@ -51,70 +79,28 @@ const LoginForm = ({ authenticated, setAuthenticated }) => {
           onChange={updateEmail}
         />
       </div>
-      <div>
-        <label style={{fontFamily: 'URW Gothic', fontSize: 'large'}} htmlFor="password">Password</label>
+      <div className='flex justify-around'>
+        <label className='self-center text-brown-light' style={{fontFamily: 'Bourbon Grotesque', fontSize: 'large'}} htmlFor="password">Password</label>
         <input
+          className='flex-none rounded-lg border-2 border-red'
           name="password"
           type="password"
           placeholder="Password"
           value={password}
           onChange={updatePassword}
         />
-        <button type="submit">Login</button>
       </div>
+      <div className='flex'>
+        <p className='mx-auto text-amber text-md font-black'>Need an account? <span>
+        <button onClick={showSignUp} className='text-red text-md font-black'> Sign Up Here</button></span></p>
+      </div>
+      <div className='flex justify-center space-x-8'>
+        <button type="submit" className="transition duration-500 ease-in-out flex items-center justify-center px-4 py-2 text-md rounded-md text-yellow bg-blue hover:bg-brown-light hover:text-yellow-dark" style={{fontFamily: 'Bourbon Grotesque'}}>Login</button>
+        <button onClick={demoLogin} className="transition duration-500 ease-in-out flex items-center justify-center px-4 py-2 text-md rounded-md text-yellow bg-amber hover:bg-brown-light hover:text-yellow-dark" style={{fontFamily: 'Bourbon Grotesque'}}>Demo</button>
+      </div>
+      
     </form>
-    {/* <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-md w-full space-y-8">
-          <div>
-            <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow" />
-            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-              Sign in to your account
-            </h2>
-            <p class="mt-2 text-center text-sm text-gray-600">
-              Or
-              <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                start your 14-day free trial
-              </a>
-            </p>
-          </div>
-          <form class="mt-8 space-y-6" action="#" method="POST">
-            <input type="hidden" name="remember" value="true"></input>
-            <div class="rounded-md shadow-sm -space-y-px">
-              <div>
-                <label for="email-address" class="sr-only">Email address</label>
-                <input id="email-address" name="email" type="email" autocomplete="email" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" ></input>
-              </div>
-              <div>
-                <label for="password" class="sr-only">Password</label>
-                <input id="password" name="password" type="password" autocomplete="current-password" required class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" ></input>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-between">
-              
-            
-
-              <div class="text-sm">
-                <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-                  Forgot your password?
-                </a>
-              </div>
-            </div>
-
-            <div>
-              <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                  {/* <!-- Heroicon name: solid/lock-closed --> */}
-                  {/* <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                  </svg>
-                </span>
-                Sign in
-              </button>
-            </div>
-          </form>
-        </div>
-      </div> */} 
+   
     </>
   );
 };

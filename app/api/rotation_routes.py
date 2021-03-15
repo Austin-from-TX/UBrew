@@ -17,7 +17,7 @@ def follow_rotation(id):
     following = [follow.id for follow in user.followers]
    
     
-    rotations = Rotation.query.filter(Rotation.user_id.in_(following)).order_by(desc(Rotation.updated_at)).all()
+    # rotations = Rotation.query.filter(Rotation.user_id.in_(following)).order_by(desc(Rotation.updated_at)).all()
     #     feed.append(posts)
     # console.log()
    

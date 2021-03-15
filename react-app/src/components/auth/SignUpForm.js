@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../services/auth';
 
-const SignUpForm = ({authenticated, setAuthenticated}) => {
+const SignUpForm = ({authenticated, setAuthenticated, setShowLoginModal, setShowSignUpModal}) => {
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
   const [username, setUsername] = useState("");
@@ -44,12 +44,24 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
     setRepeatPassword(e.target.value);
   };
 
+  const onClick = (e) => {
+    setShowSignUpModal(false)
+  }
+
+  const showLogin = (e) => {
+    setShowSignUpModal(false)
+    setShowLoginModal(true)
+  }
+
   if (authenticated) {
     return <Redirect to="/" />;
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <form className='flex-col space-y-4' onSubmit={onSignUp}>
+      <button className="btn__x" onClick={onClick}>
+          <i className="fas fa-times"></i>
+      </button>
       <div>
         <label>First Name</label>
         <input
@@ -104,6 +116,10 @@ const SignUpForm = ({authenticated, setAuthenticated}) => {
           value={repeatPassword}
           required={true}
         ></input>
+      </div>
+      <div className='flex'>
+        <p className='mx-auto text-amber text-md font-black'>Already have an account? <span>
+        <button onClick={showLogin} className='text-red text-md font-black'> Login Here</button></span></p>
       </div>
       <button type="submit">Sign Up</button>
     </form>
