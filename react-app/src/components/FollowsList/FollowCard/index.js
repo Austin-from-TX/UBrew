@@ -14,15 +14,17 @@ export default function FollowCard({follow}){
 
     return(
         <>
-        <div className='flex  border md:flex-shrink-0 rounded-lg m-4 p-4 justify-between'>
-           <Link to={`/users/${follow.id}`}>
-            <div className='flex space-x-2'>
-                <p>{follow.username}</p>
-                <p>({follow.first_name} {follow.last_name})</p>
-            </div>
-            </Link>
-           <div>
-            <button onClick={unfollow} className=''>UnFollow</button>
+        <div className='border-2 border-red md:flex-shrink-0 rounded-lg m-4 p-4'>
+            <div className='flex justify-between '>
+                <div>
+                    <p className='text-brown text-lg font-black'>{follow.username}</p>
+                </div>
+               
+                <div>
+                    <Link to={`/users/${follow.id}`}>
+                        <button className="text-yellow bg-blue hover:bg-brown px-3 py-2 rounded-md text-xs" style={{fontFamily: 'Bourbon Grotesque'}}>View</button>
+                    </Link>
+                </div>
             </div>
         </div>  
         </>

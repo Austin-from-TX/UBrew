@@ -34,10 +34,11 @@ def remove_follower(id):
 
         db.session.commit()
 
-        following = [follow.to_dict() for follow in follower.followers]
+        userFollows = [follow.to_dict() for follow in follower.followers]
+        profFollowers = [follow.to_dict() for follow in followed_user.follows]
         
 
-        return jsonify(following)
+        return jsonify(userFollows, profFollowers)
 
 
 @follow_routes.route('/<int:id>', methods=['POST'])
@@ -61,5 +62,8 @@ def create_follow(id):
 
         db.session.commit()
 
-        return jsonify([follow.to_dict() for follow in follower.followers])
+        userFollows = [follow.to_dict() for follow in follower.followers]
+        profFollowers = [follow.to_dict() for follow in followed_user.follows]
+
+        return jsonify(userFollows, profFollowers)
 
