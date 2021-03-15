@@ -209,7 +209,7 @@ export const addBrew = (brewSubmit) => async (dispatch) => {
     return p_result.brew_id
     }
 
-const initialState = {newBrew: null, currentBrew: {}, allBrews: {}, userBrews: {}}
+const initialState = {newBrew: null, currentBrew: {}, allBrews: {}, userBrews: []}
 
 
     const brewReducer = (state = initialState, action) => {
@@ -225,10 +225,9 @@ const initialState = {newBrew: null, currentBrew: {}, allBrews: {}, userBrews: {
                 newState.currentBrew = action.payload
                 return newState
             case GET_USER_BREWS:
-                action.brews.forEach(brew => {
-                    updateState.userBrews[brew.id] = brew
-                })
-                return updateState
+                    newState = Object.assign({}, state)
+                    newState.userBrews = action.brews
+                return newState
             case GET_ALL_BREWS:
                 action.brews.forEach(brew => {
                     updateState.allBrews[brew.id] = brew

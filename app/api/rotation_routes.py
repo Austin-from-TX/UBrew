@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, session, request
 from flask_login import login_required
 from app.models import db, User, Brew, Rotation
 from app.forms import RotationForm
-from sqlalchemy import desc
+from sqlalchemy import asc, desc
 from datetime import datetime
 import json
 
