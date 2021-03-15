@@ -30,7 +30,7 @@ export default function CommentCard({comment}){
         <div className='flex-col w-full self-center m-4 border-2 border-red p-4 pb-1 rounded-lg box-border bg-gray shadow-xl' >
             <div className='space-y-4'>
                 <p className='text-lg font-medium text-brown-light'>{comment.comment}</p>
-                <p className='text-sm text-brown-light'>User: {<Link to={`/users/${comment.user_id}`}>{comment.username}</Link>}</p>
+                <p className='text-sm text-brown-light'>{<Link to={`/users/${comment.user_id}`}>{comment.username}</Link>}</p>
                 <p className='text-xs text-brown-light'>{comment.created_at}</p>  
             </div>
             <div>        
