@@ -39,7 +39,7 @@ const NavBar = ({ setAuthenticated , authenticated, setDisplay }) => {
               <div className="ml-4 flex items-center md:ml-6">
                 {authenticated ? 
                   <ProfileLinks setAuthenticated={setAuthenticated} setDisplay={setDisplay}/> : 
-                  <LoginModal setAuthenticated={setAuthenticated} setDisplay={setDisplay}/>
+                  <LoginModal setAuthenticated={setAuthenticated} authenticated={authenticated} />
                 }
                
                 
@@ -53,7 +53,7 @@ const NavBar = ({ setAuthenticated , authenticated, setDisplay }) => {
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3" role='menu'>
             {authenticated ? 
                   <ProfileLinks setAuthenticated={setAuthenticated} setDisplay={setDisplay}/> : 
-                  <LoginModal setAuthenticated={setAuthenticated} setDisplay={setDisplay}/>
+                  <LoginModal setAuthenticated={setAuthenticated} authenticated={authenticated}/>
                 }
           </div>
         </div>

@@ -68,7 +68,7 @@ const LoginForm = ({ authenticated, setAuthenticated, setShowLoginModal, setShow
       <button className="btn__x" onClick={onClick}>
           <i className="fas fa-times"></i>
       </button>
-      <div className='flex justify-around'>
+      <div className='flex justify-between'>
         <label className='self-center text-brown-light' style={{fontFamily: 'Bourbon Grotesque', fontSize: 'large'}} htmlFor="email">Email</label>
         <input
           className='flex-none rounded-lg border-2 border-red'
@@ -79,7 +79,7 @@ const LoginForm = ({ authenticated, setAuthenticated, setShowLoginModal, setShow
           onChange={updateEmail}
         />
       </div>
-      <div className='flex justify-around'>
+      <div className='flex justify-between'>
         <label className='self-center text-brown-light' style={{fontFamily: 'Bourbon Grotesque', fontSize: 'large'}} htmlFor="password">Password</label>
         <input
           className='flex-none rounded-lg border-2 border-red'
