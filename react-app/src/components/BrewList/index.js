@@ -12,7 +12,7 @@ export default function BrewList(){
     const userId = user.userId
   
     const dispatch = useDispatch()
-    const brewList = Object.values(useSelector(state => state.brew.userBrews))
+    const brewList = useSelector(state => state.brew.userBrews)
 
     const getBrews = async () => {
         await dispatch(brewActions.getBrewList(userId))

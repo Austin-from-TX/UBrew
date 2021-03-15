@@ -23,7 +23,7 @@ export default function Home({authenticated, setAuthenticated, display}) {
     if (!demoUser.errors) {
       dispatch(setUser(demoUser))
       setAuthenticated(true);
-      history.push("/");
+      history.push(`/users/${demoUser.id}`);
     } else {
       setErrors(demoUser.errors);
     }

@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import {  useDispatch, useSelector } from 'react-redux'
+import { Redirect, Link } from 'react-router-dom'
 import * as followActions from '../../store/follows'
 import * as rotationActions from '../../store/rotations'
 import FollowsList from '../FollowsList'
 import CustomModal from '../CustomModal'
 import UserFeed from '../UserFeed'
+import brew from '../photos/perfect-brew.jpg'
 
 
 const UserProf = () => {
@@ -16,9 +17,9 @@ const UserProf = () => {
 
     const dispatch = useDispatch()
     const user = useSelector(state => state.session.user)
-    const followed = useSelector(state => state.follows.userFollows)
-    const followers = useSelector(state => state.follows.userFollowers)
-    const feed = useSelector(state => state.rotation.feed)
+    // const followed = useSelector(state => state.follows.userFollows)
+    // const followers = useSelector(state => state.follows.userFollowers)
+    // const feed = useSelector(state => state.rotation.feed)
 
     const user_id = user.id
     
@@ -42,9 +43,10 @@ const UserProf = () => {
     }
 
     if (!loaded) return <span>Loading</span>;
-
+    if (user) return <Redirect to={`/users/${user.id}`} />
     return (
         <>  
+          {/* <div className='absolute'>
           <h1>Hello {user.username} from Your User Page </h1>
           <button onClick={(e) => clickHandler(e, "followers")} >See Who Follows You</button>
           <div>
@@ -56,15 +58,10 @@ const UserProf = () => {
          <button onClick={(e) => clickHandler(e, "followed")} 
         >See Who You're Following </button>
          </div>
-         {/* <CustomModal showModal={showFollowersModal} >
-          <FollowsList follows={followed} setShowModal={setShowFollowersModal} /> 
-          </CustomModal> */}
-         
-          <UserFeed feed={feed}/>
 
           <Link to={`/brews/add/new`}>Add A Brew</Link>
-
-          {/* //Fire query to my followers and diplay in order by updated_at*/}
+        </div>
+         <img className='object-cover' src={brew} alt='perfect-brew'></img> */}
         </>
     )
 }

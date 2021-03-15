@@ -2,15 +2,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import * as followActions from '../../../store/follows'
 import { Link } from 'react-router-dom'
 
-export default function FollowCard({follow}){
+export default function FollowCard({follow, setShowModal}){
 
-    const dispatch = useDispatch()
-    const sessionUser = useSelector(state => state.session.user)
-
-    const unfollow = (follower_id, following_id) => {
-        
-        dispatch(followActions.removeFollower({follower_id: sessionUser.id, followed_id: follow.id}))
-    }
 
     return(
         <>
@@ -22,7 +15,7 @@ export default function FollowCard({follow}){
                
                 <div>
                     <Link to={`/users/${follow.id}`}>
-                        <button className="text-yellow bg-blue hover:bg-brown px-3 py-2 rounded-md text-xs" style={{fontFamily: 'Bourbon Grotesque'}}>View</button>
+                        <button onClick={e => setShowModal(false)} className="text-yellow bg-blue hover:bg-brown px-3 py-2 rounded-md text-xs" style={{fontFamily: 'Bourbon Grotesque'}}>View</button>
                     </Link>
                 </div>
             </div>

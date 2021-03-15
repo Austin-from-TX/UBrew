@@ -21,7 +21,7 @@ const LoginForm = ({ authenticated, setAuthenticated, setShowLoginModal, setShow
     if (!demoUser.errors) {
       dispatch(setUser(demoUser))
       setAuthenticated(true);
-      history.push("/");
+      history.push(`/users/${demoUser.id}`);
     } else {
       setErrors(demoUser.errors);
     }

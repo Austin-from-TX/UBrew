@@ -11,7 +11,7 @@ import BrewView from './components/BrewView/BrewView'
 import UserProf from './components/UserProf/userProf'
 import RotationList from './components/RotationList'
 import SearchBrews from './components/SearchBrews'
-import Dashboard from './components/Dashboard'
+import CustomModal from './components/CustomModal'
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import { authenticate } from "./services/auth";
 import { setUser } from "./store/session"

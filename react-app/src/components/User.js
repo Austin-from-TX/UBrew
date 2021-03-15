@@ -121,7 +121,12 @@ function User() {
        
         <div>
           <p className='text-xl font-black mt-8 ml-14 mb-8 text-brown'>{user.username}'s Current Rotation</p>
-          {sessionUser.id == userId && <button> Manage Rotation </button>}
+          {sessionUser.id == userId && (
+          <div className='flex justify-around'>
+            <Link to={`/rotations/${sessionUser.id}`}><button className="transition duration-500 ease-in-out bg-blue text-yellow hover:bg-brown hover:text-yellow-dark px-4 py-3 rounded-md text-md"   style={{fontFamily: 'Bourbon Grotesque'}}> Manage Rotation </button></Link>
+            <Link to={`/brews/add/new`}><button className="transition duration-500 ease-in-out bg-blue text-yellow hover:bg-brown hover:text-yellow-dark px-4 py-3 rounded-md text-md"   style={{fontFamily: 'Bourbon Grotesque'}}>Add A Brew</button></Link>
+          </div>
+          )}
           {rotations.map(rotation => (
             <div className='flex border-2 p-4 justify-around m-2 w-full rounded-xl border-brown'>
               <div>
