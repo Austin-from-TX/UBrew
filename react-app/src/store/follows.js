@@ -32,6 +32,7 @@ const profFollows = (follows) => {
     }
 }
 const profFollowing = (following) => {
+    console.log('from the action', following)
     return { 
         type: PROF_FOLLOWING, 
         following
@@ -49,7 +50,8 @@ export const removeFollower = ({follower_id, followed_id}) => async dispatch => 
     })
     const data = await res.json()
     console.log(data)
-    dispatch(deleteFollow(data))
+    dispatch(deleteFollow(data[0]))
+    dispatch(profFollowing(data[1]))
     return data
 }
 
@@ -62,7 +64,9 @@ export const newFollow = ({follower_id, followed_id}) => async dispatch => {
         body: JSON.stringify({follower_id, followed_id})
     })
     const data = await res.json()
-    dispatch(addFollow(data))
+    console.log(data)
+    dispatch(addFollow(data[0]))
+    dispatch(profFollowing(data[1]))
     return data 
 }
 
