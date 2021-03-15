@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import * as followActions from '../../store/follows'
 import * as rotationActions from '../../store/rotations'
 import FollowsList from '../FollowsList'
@@ -61,7 +62,7 @@ const UserProf = () => {
          
           <UserFeed feed={feed}/>
 
-
+          <Link to={`/brews/add/new`}>Add A Brew</Link>
 
           {/* //Fire query to my followers and diplay in order by updated_at*/}
         </>

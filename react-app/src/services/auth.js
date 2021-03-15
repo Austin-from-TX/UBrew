@@ -1,3 +1,5 @@
+
+
 export const authenticate = async() => {
   const response = await fetch('/api/auth/',{
     headers: {
@@ -27,6 +29,7 @@ export const logout = async () => {
       "Content-Type": "application/json",
     }
   });
+ 
   return await response.json();
 };
 

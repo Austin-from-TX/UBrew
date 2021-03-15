@@ -9,8 +9,9 @@ export default function DeleteBrewForm({setShowDeleteModal, brew}){
 
     const deleteRecipe = async e => {
         e.preventDefault()
+        setShowDeleteModal(false)
         await dispatch(brewActions.removeBrew({id: brew.id}))
-        history.push(`/dashboard`)
+        history.push(`/`)
     }
 
     return(

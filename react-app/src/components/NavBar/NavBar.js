@@ -39,7 +39,7 @@ const NavBar = ({ setAuthenticated , authenticated, setDisplay }) => {
               <div className="ml-4 flex items-center md:ml-6">
                 {authenticated ? 
                   <ProfileLinks setAuthenticated={setAuthenticated} setDisplay={setDisplay}/> : 
-                  <LoginModal setAuthenticated={setAuthenticated} setDisplay={setDisplay}/>
+                  <LoginModal setAuthenticated={setAuthenticated} authenticated={authenticated} />
                 }
                
                 
@@ -51,14 +51,10 @@ const NavBar = ({ setAuthenticated , authenticated, setDisplay }) => {
     
         <div className="md:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3" role='menu'>
-            {/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
-            <NavLink to={`/search/brews`} className="transition duration-500 ease-in-out text-yellow hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Brews</NavLink>
-            
-            <NavLink to='/login' className="text-yellow hover:bg-brown hover:text-amber px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Login</NavLink>
-    
-            <NavLink to='/sign-up' className="text-yellow hover:bg-brown hover:text-amber px-6 py-4 rounded-md text-xl"  style={{fontFamily: 'Bourbon Grotesque'}}>Signup</NavLink>
-    
-      
+            {authenticated ? 
+                  <ProfileLinks setAuthenticated={setAuthenticated} setDisplay={setDisplay}/> : 
+                  <LoginModal setAuthenticated={setAuthenticated} authenticated={authenticated}/>
+                }
           </div>
         </div>
       </nav>

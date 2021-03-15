@@ -15,7 +15,7 @@ export default function ProfileLinks({setAuthenticated, setDisplay}){
     return (
         <>
         {user && 
-        <div className="ml-3 relative flex">
+        <div className="flex-col ml-3 relative xs:flex">
             <NavLink to={`/`} className="transition duration-500 ease-in-out text-yellow hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Home</NavLink>
             <NavLink to={`/search/brews`} className="transition duration-500 ease-in-out text-yellow hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Brews</NavLink>             
             <NavLink to={`/rotations/${user.id}`} className="transition duration-500 ease-in-out text-yellow hover:bg-brown hover:text-yellow-dark px-6 py-4 rounded-md text-xl" role="menuitem"  style={{fontFamily: 'Bourbon Grotesque'}}>Rotation</NavLink>
