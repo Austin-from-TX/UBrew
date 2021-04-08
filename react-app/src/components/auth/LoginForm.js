@@ -91,7 +91,7 @@ const LoginForm = ({ authenticated, setAuthenticated, setShowLoginModal, setShow
         />
       </div>
       <div className='flex'>
-        <p className='mx-auto text-amber text-md font-black'>Need an account? <span>
+        <p className='mx-auto my-4 text-amber text-md font-black'>Need an account? <span>
         <button onClick={showSignUp} className='text-red text-md font-black'> Sign Up Here</button></span></p>
       </div>
       <div className='flex justify-center space-x-8'>
